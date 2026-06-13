@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connexion - TechNova Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#050816;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+}
+
+.login-box{
+width:400px;
+max-width:90%;
+background:rgba(255,255,255,.05);
+padding:40px;
+border-radius:25px;
+border:1px solid rgba(255,255,255,.1);
+backdrop-filter:blur(20px);
+}
+
+h1{
+text-align:center;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+color:#cbd5e1;
+margin-bottom:30px;
+}
+
+input{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+border:none;
+border-radius:12px;
+background:rgba(255,255,255,.08);
+color:white;
+}
+
+input::placeholder{
+color:#94a3b8;
+}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:linear-gradient(90deg,#2563eb,#7c3aed);
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+}
+
+.link{
+text-align:center;
+margin-top:20px;
+}
+
+.link a{
+color:#60a5fa;
+text-decoration:none;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h1>Connexion</h1>
+
+<p class="subtitle">
+Bienvenue sur TechNova Hub
+</p>
+
+<input type="email" placeholder="Votre email">
+
+<input type="password" placeholder="Votre mot de passe">
+
+<button>Se connecter</button>
+
+<div class="link">
+Pas encore de compte ?
+<a href="register.html">S'inscrire</a>
+</div>
+
+</div>
+
+</body>
+  </html>

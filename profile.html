@@ -60,7 +60,15 @@ border-radius:12px;
 <div class="profile-card">
 
 <h1>👤 Mon Profil</h1>
+<input type="file" id="photoInput" accept="image/*">
 
+<button onclick="uploadPhoto()">
+Changer la photo
+</button>
+
+<img id="profilePhoto"
+src="https://via.placeholder.com/150"
+alt="Photo de profil">
 <div class="info">
 <strong>Nom :</strong>
 <span id="nom">Chargement...</span>

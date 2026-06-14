@@ -21,10 +21,36 @@ text-align:center;
 </head>
 <body>
 
-<div>
 <h1>Bienvenue sur TechNova Hub 🚀</h1>
-<p>Connexion réussie.</p>
-</div>
+
+<button onclick="logout()">Déconnexion</button>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+getAuth,
+signOut
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyADpfbXDg9Sr9sa-y9ImIydodzvQqUOpDU",
+  authDomain: "technova-hub-a6133.firebaseapp.com",
+  projectId: "technova-hub-a6133",
+  storageBucket: "technova-hub-a6133.firebasestorage.app",
+  messagingSenderId: "858060696573",
+  appId: "1:858060696573:web:8f62c54a7e798bce230794"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+window.logout = async function(){
+  await signOut(auth);
+  window.location.href = "login.html";
+}
+
+</script>
 
 </body>
-</html>

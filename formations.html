@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formations - TechNova Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#050816;
+color:white;
+padding:20px;
+overflow-x:hidden;
+}
+
+body::before{
+content:"";
+position:fixed;
+width:400px;
+height:400px;
+background:#4f46e5;
+filter:blur(140px);
+top:-150px;
+left:-150px;
+opacity:.4;
+z-index:-1;
+}
+
+body::after{
+content:"";
+position:fixed;
+width:400px;
+height:400px;
+background:#2563eb;
+filter:blur(140px);
+bottom:-150px;
+right:-150px;
+opacity:.4;
+z-index:-1;
+}
+
+.header{
+text-align:center;
+margin-bottom:30px;
+}
+
+.header h1{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.header p{
+color:#cbd5e1;
+}
+
+.search-box{
+max-width:600px;
+margin:20px auto;
+}
+
+.search-box input{
+width:100%;
+padding:15px;
+border:none;
+border-radius:15px;
+background:rgba(255,255,255,.08);
+color:white;
+outline:none;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:20px;
+margin:40px 0;
+}
+
+.stat{
+background:rgba(255,255,255,.05);
+padding:25px;
+border-radius:20px;
+text-align:center;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.stat h2{
+color:#60a5fa;
+font-size:32px;
+}
+
+.formations{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+}
+
+.card{
+background:rgba(255,255,255,.05);
+padding:25px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.08);
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-5px);
+border-color:#60a5fa;
+}
+
+.card h3{
+margin-bottom:10px;
+}
+
+.card p{
+color:#cbd5e1;
+margin-bottom:15px;
+}
+
+.progress{
+width:100%;
+height:10px;
+background:rgba(255,255,255,.1);
+border-radius:20px;
+overflow:hidden;
+margin-bottom:15px;
+}
+
+.progress span{
+display:block;
+height:100%;
+background:#60a5fa;
+}
+
+.btn{
+display:inline-block;
+padding:12px 20px;
+border-radius:12px;
+text-decoration:none;
+background:linear-gradient(90deg,#2563eb,#7c3aed);
+color:white;
+font-weight:600;
+}
+
+.btn:hover{
+opacity:.9;
+}
+
+.back{
+display:inline-block;
+margin-bottom:30px;
+color:white;
+text-decoration:none;
+padding:10px 20px;
+background:rgba(255,255,255,.08);
+border-radius:12px;
+}
+
+@media(max-width:768px){
+
+.header h1{
+font-size:30px;
+}
+
+.stats,
+.formations{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<a href="dashboard.html" class="back">
+⬅ Retour Dashboard
+</a>
+
+<div class="header">
+<h1>📚 Formations TechNova Hub</h1>
+<p>Développez vos compétences numériques et professionnelles.</p>
+</div>
+
+<div class="search-box">
+<input type="text" placeholder="🔍 Rechercher une formation...">
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<h2>6</h2>
+<p>Formations</p>
+</div>
+
+<div class="stat">
+<h2>500+</h2>
+<p>Étudiants</p>
+</div>
+
+<div class="stat">
+<h2>100+</h2>
+<p>Certificats</p>
+</div>
+
+</div>
+
+<div class="formations">
+
+<div class="card">
+<h3>🌐 HTML & CSS</h3>
+<p>Créer des sites web modernes et responsives.</p>
+<div class="progress">
+<span style="width:0%"></span>
+</div>
+<a href="#" class="btn">Commencer</a>
+</div>
+
+<div class="card">
+<h3>⚡ JavaScript</h3>
+<p>Rendre vos sites interactifs et dynamiques.</p>
+<div class="progress">
+<span style="width:0%"></span>
+</div>
+<a href="#" class="btn">Commencer</a>
+</div>
+
+<div class="card">
+<h3>🔥 Firebase</h3>
+<p>Créer des applications connectées au cloud.</p>
+<div class="progress">
+<span style="width:0%"></span>
+</div>
+<a href="#" class="btn">Commencer</a>
+</div>
+
+<div class="card">
+<h3>📱 Développement Mobile</h3>
+<p>Créer des applications Android modernes.</p>
+<div class="progress">
+<span style="width:0%"></span>
+</div>
+<a href="#" class="btn">Commencer</a>
+</div>
+
+<div class="card">
+<h3>🤖 Intelligence Artificielle</h3>
+<p>Découvrir les outils IA les plus utilisés.</p>
+<div class="progress">
+<span style="width:0%"></span>
+</div>
+<a href="#" class="btn">Commencer</a>
+</div>
+
+<div class="card">
+<h3>💼 Freelancing</h3>
+<p>Apprendre à gagner de l'argent grâce à vos compétences.</p>
+<div class="progress">
+<span style="width:0%"></span>
+</div>
+<a href="#" class="btn">Commencer</a>
+</div>
+
+</div>
+
+</body>
+  </html>

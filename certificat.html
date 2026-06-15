@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificat - TechNova Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#050816;
+color:white;
+padding:20px;
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:100vh;
+}
+
+.certificate{
+max-width:900px;
+width:100%;
+background:white;
+color:#111;
+padding:50px;
+border-radius:25px;
+text-align:center;
+box-shadow:0 10px 40px rgba(0,0,0,.3);
+}
+
+.logo{
+font-size:42px;
+font-weight:800;
+color:#2563eb;
+margin-bottom:10px;
+}
+
+.title{
+font-size:38px;
+font-weight:700;
+margin-bottom:20px;
+}
+
+.subtitle{
+font-size:18px;
+margin-bottom:30px;
+}
+
+.name{
+font-size:42px;
+font-weight:800;
+color:#4f46e5;
+margin:20px 0;
+}
+
+.course{
+font-size:24px;
+font-weight:600;
+margin:20px 0;
+}
+
+.id{
+margin-top:20px;
+font-size:14px;
+color:#555;
+}
+
+.signature{
+margin-top:50px;
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+gap:20px;
+}
+
+.sign-box{
+text-align:center;
+}
+
+.line{
+width:220px;
+height:2px;
+background:#111;
+margin-bottom:10px;
+}
+
+.actions{
+margin-top:40px;
+text-align:center;
+}
+
+.btn{
+padding:14px 25px;
+border:none;
+border-radius:12px;
+background:linear-gradient(90deg,#2563eb,#7c3aed);
+color:white;
+font-weight:600;
+cursor:pointer;
+margin:10px;
+}
+
+.back{
+text-decoration:none;
+}
+
+@media print{
+
+.actions{
+display:none;
+}
+
+body{
+background:white;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div>
+
+<div class="certificate">
+
+<div class="logo">
+🚀 TechNova Hub
+</div>
+
+<h1 class="title">
+🏆 CERTIFICAT DE RÉUSSITE
+</h1>
+
+<p class="subtitle">
+Décerné à
+</p>
+
+<div class="name" id="nom">
+Chargement...
+</div>
+
+<p>
+Pour avoir terminé avec succès la formation :
+</p>
+
+<div class="course">
+🌐 HTML & CSS
+</div>
+
+<p>
+Avec engagement, discipline et excellence.
+</p>
+
+<div class="id">
+ID Certificat : TH-2026-0001
+</div>
+
+<div class="signature">
+
+<div class="sign-box">
+<div class="line"></div>
+<p>Béni Kikwika</p>
+<p>Fondateur</p>
+</div>
+
+<div class="sign-box">
+<div class="line"></div>
+<p>TechNova Hub</p>
+<p>Certification</p>
+</div>
+
+</div>
+
+</div>
+
+<div class="actions">
+
+<button class="btn" onclick="window.print()">
+📥 Télécharger PDF
+</button>
+
+<a href="dashboard.html" class="back">
+<button class="btn">
+⬅ Retour Dashboard
+</button>
+</a>
+
+</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+import {
+getAuth,
+onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+import {
+getFirestore,
+doc,
+getDoc
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "TON_API_KEY",
+  authDomain: "TON_AUTH_DOMAIN",
+  projectId: "TON_PROJECT_ID",
+  storageBucket: "TON_STORAGE_BUCKET",
+  messagingSenderId: "TON_MESSAGING_SENDER_ID",
+  appId: "TON_APP_ID"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+onAuthStateChanged(auth, async(user)=>{
+
+if(!user){
+window.location.href="login.html";
+return;
+}
+
+const docRef = doc(db,"users",user.uid);
+const docSnap = await getDoc(docRef);
+
+if(docSnap.exists()){
+document.getElementById("nom").textContent =
+docSnap.data().nom;
+}else{
+document.getElementById("nom").textContent =
+user.email;
+}
+
+});
+
+</script>
+
+</body>
+</html>

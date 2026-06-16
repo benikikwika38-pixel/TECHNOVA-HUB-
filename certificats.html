@@ -141,22 +141,61 @@ background:white;
 
 <h1 class="title">
 🏆 CERTIFICAT DE RÉUSSITE
-</h1>
+
+<div id="formulaire">
+
+<input
+type="text"
+id="nomInput"
+placeholder="Nom complet"
+style="
+width:100%;
+padding:15px;
+margin:10px 0;
+border-radius:12px;
+border:1px solid #ccc;
+font-size:16px;
+">
+
+<input
+type="text"
+id="formationInput"
+placeholder="Formation suivie"
+style="
+width:100%;
+padding:15px;
+margin:10px 0;
+border-radius:12px;
+border:1px solid #ccc;
+font-size:16px;
+">
+
+<button
+onclick="genererCertificat()"
+class="btn">
+🎓 Générer le certificat
+</button>
+
+</div>
+
+<div id="certificat" style="display:none;">
 
 <p class="subtitle">
 Décerné à
 </p>
 
-<div class="name" id="nom">
-Chargement...
-</div>
+<div class="name" id="nomAffiche"></div>
 
 <p>
 Pour avoir terminé avec succès la formation :
 </p>
 
-<div class="course">
-🌐 HTML & CSS
+<div class="course" id="formationAffiche"></div>
+
+<p>
+Avec engagement, discipline et excellence.
+</p>
+
 </div>
 
 <p>
@@ -249,6 +288,31 @@ user.email;
 });
 
 </script>
+<script>
 
+function genererCertificat(){
+
+const nom =
+document.getElementById("nomInput").value;
+
+const formation =
+document.getElementById("formationInput").value;
+
+if(nom==="" || formation===""){
+alert("Remplissez tous les champs");
+return;
+}
+
+document.getElementById("nomAffiche").textContent = nom;
+
+document.getElementById("formationAffiche").textContent = formation;
+
+document.getElementById("certificat").style.display = "block";
+
+document.getElementById("formulaire").style.display = "none";
+
+}
+
+</script>
 </body>
 </html>

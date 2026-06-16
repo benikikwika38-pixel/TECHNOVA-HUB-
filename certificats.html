@@ -198,12 +198,9 @@ Avec engagement, discipline et excellence.
 
 </div>
 
-<p>
-Avec engagement, discipline et excellence.
-</p>
 
 <div class="id">
-ID Certificat : TH-2026-0001
+ID Certificat : <span id="certId"></span>
 </div>
 
 <div class="signature">
@@ -302,7 +299,11 @@ if(nom==="" || formation===""){
 alert("Remplissez tous les champs");
 return;
 }
+const certificatID =
+"TH-2026-" + Math.floor(Math.random()*100000);
 
+document.getElementById("certId").textContent =
+certificatID;
 document.getElementById("nomAffiche").textContent = nom;
 
 document.getElementById("formationAffiche").textContent = formation;

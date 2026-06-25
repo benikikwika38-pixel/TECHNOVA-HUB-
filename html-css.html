@@ -123,74 +123,227 @@ Vous apprendrez les bases du développement web étape par étape.
 
 🏆 Marquer comme terminé
 <div class="lesson">
-<h2>📖 Chapitre 1 : Introduction à l'informatique et au Web</h2>
+<div class="lesson">
+
+<h2>📘 CHAPITRE 1 : PRÉSENTATION DU HTML</h2>
+
+<p><strong>Définition</strong></p>
+
 <p>
-Découverte de l'informatique, d'Internet, des sites web et du métier de développeur web.
+HTML est l’acronyme de HyperText Markup Language, ce qui signifie Langage de Balisage Hypertexte.
 </p>
+
+<p>
+- C’est le langage standard utilisé pour créer et structurer le contenu des pages web.<br>
+- Ce n’est pas un langage de programmation : il ne fait pas de calcul, il décrit seulement la disposition et le sens des éléments.<br>
+- Son rôle : former le squelette de la page ; la décoration (couleurs, formes) se fera plus tard avec le langage CSS.
+</p>
+
 </div>
 
 <div class="lesson">
-<h2>📖 Chapitre 2 : Découverte du HTML</h2>
+
+<h2>📘 CHAPITRE 2 : LES BALISES ET LES ATTRIBUTS</h2>
+
+<h3>2.1 Définition d’une balise</h3>
+
 <p>
-Comprendre le rôle du HTML, sa structure et son importance dans la création des sites web.
+Une balise est une instruction écrite entre les symboles &lt; et &gt;.
+Elle indique au navigateur quel type d’élément afficher.
 </p>
+
+<h3>2.2 Types de balises</h3>
+
+<p>
+- Balise avec contenu : S’ouvre et se ferme, elle encadre un texte ou un autre élément.
+</p>
+
+<div class="code">
+&lt;p&gt;Mon texte&lt;/p&gt;
+</div>
+
+<p>
+- Balise auto-fermante : N’a pas de contenu, elle fonctionne seule.
+</p>
+
+<div class="code">
+&lt;br&gt;<br>
+&lt;img&gt;
+</div>
+
+<h3>2.3 Définition d’un attribut</h3>
+
+<p>
+Un attribut est une information complémentaire ajoutée dans la balise pour préciser son fonctionnement.
+</p>
+
+<div class="code">
+&lt;a href="page.html"&gt;Lien&lt;/a&gt;
+</div>
+
+<p>
+Dans cet exemple :
+<br>
+- href est l’attribut
+<br>
+- page.html est sa valeur
+</p>
+
 </div>
 
 <div class="lesson">
-<h2>📖 Chapitre 3 : Les balises HTML essentielles</h2>
+
+<h2>📘 CHAPITRE 3 : STRUCTURE GÉNÉRALE D’UNE PAGE HTML</h2>
+
+<div class="code">
+
+&lt;!DOCTYPE html&gt;<br>
+&lt;html lang="fr"&gt;<br>
+&lt;head&gt;<br>
+&nbsp;&nbsp;&lt;meta charset="UTF-8"&gt;<br>
+&nbsp;&nbsp;&lt;title&gt;Titre de ma page&lt;/title&gt;<br>
+&lt;/head&gt;<br>
+&lt;body&gt;<br>
+&nbsp;&nbsp;Ici tout le contenu visible<br>
+&lt;/body&gt;<br>
+&lt;/html&gt;
+
+</div>
+
 <p>
-Apprendre les balises h1, p, a, img, div, span et leur utilisation.
+<strong>Définition des éléments :</strong>
 </p>
+
+<p>
+- &lt;!DOCTYPE html&gt; : précise que le document utilise HTML5.<br>
+- &lt;html&gt; : balise racine qui contient toute la page.<br>
+- &lt;head&gt; : contient les informations invisibles pour l'utilisateur.<br>
+- &lt;meta charset="UTF-8"&gt; : permet d'afficher correctement les accents et caractères spéciaux.<br>
+- &lt;title&gt; : définit le nom affiché dans l’onglet du navigateur.<br>
+- &lt;body&gt; : contient tout ce que l’utilisateur voit à l’écran.
+</p>
+
 </div>
 
 <div class="lesson">
-<h2>📖 Chapitre 4 : Les liens et les images</h2>
+
+<h2>📘 CHAPITRE 4 : PRINCIPALES BALISES À UTILISER</h2>
+
 <p>
-Créer des liens vers d'autres pages et afficher des images dans un site web.
+<strong>&lt;h1&gt; à &lt;h6&gt;</strong> : Balises de titre du plus grand au plus petit.
 </p>
+
+<div class="code">
+&lt;h1&gt;Bienvenue&lt;/h1&gt;
+</div>
+
+<p>
+<strong>&lt;p&gt;</strong> : Balise de paragraphe.
+</p>
+
+<div class="code">
+&lt;p&gt;Ceci est un paragraphe.&lt;/p&gt;
+</div>
+
+<p>
+<strong>&lt;strong&gt;</strong> : Met le texte en gras.
+</p>
+
+<div class="code">
+&lt;strong&gt;Important&lt;/strong&gt;
+</div>
+
+<p>
+<strong>&lt;em&gt;</strong> : Met le texte en italique.
+</p>
+
+<div class="code">
+&lt;em&gt;À retenir&lt;/em&gt;
+</div>
+
+<p>
+<strong>&lt;a&gt;</strong> : Crée un lien.
+</p>
+
+<div class="code">
+&lt;a href="contact.html"&gt;Contact&lt;/a&gt;
+</div>
+
+<p>
+<strong>&lt;img&gt;</strong> : Affiche une image.
+</p>
+
+<div class="code">
+&lt;img src="photo.jpg" alt="Photo"&gt;
+</div>
+
+<p>
+<strong>&lt;ul&gt; et &lt;li&gt;</strong> : Liste à puces.
+</p>
+
+<div class="code">
+&lt;ul&gt;
+&lt;li&gt;Point 1&lt;/li&gt;
+&lt;/ul&gt;
+</div>
+
+<p>
+<strong>&lt;ol&gt; et &lt;li&gt;</strong> : Liste numérotée.
+</p>
+
+<div class="code">
+&lt;ol&gt;
+&lt;li&gt;Étape 1&lt;/li&gt;
+&lt;/ol&gt;
+</div>
+
+<p>
+<strong>&lt;!-- --&gt;</strong> : Commentaire invisible.
+</p>
+
+<div class="code">
+&lt;!-- Note pour moi-même --&gt;
+</div>
+
 </div>
 
 <div class="lesson">
-<h2>📖 Chapitre 5 : Les listes et les tableaux</h2>
+
+<h2>📘 CHAPITRE 5 : RÈGLES DE BONNE ÉCRITURE</h2>
+
 <p>
-Créer des listes ordonnées, non ordonnées et des tableaux HTML.
+1. Toujours fermer les balises.
 </p>
+
+<div class="code">
+✅ &lt;p&gt;Texte&lt;/p&gt;<br>
+❌ &lt;p&gt;Texte
 </div>
 
-<div class="lesson">
-<h2>📖 Chapitre 6 : Les formulaires HTML</h2>
 <p>
-Créer des formulaires d'inscription, de connexion et de contact.
+2. Bien imbriquer les balises.
 </p>
+
+<div class="code">
+✅ &lt;p&gt;&lt;b&gt;Bonjour&lt;/b&gt;&lt;/p&gt;<br>
+❌ &lt;p&gt;&lt;b&gt;Bonjour&lt;/p&gt;&lt;/b&gt;
 </div>
 
-<div class="lesson">
-<h2>📖 Chapitre 7 : Introduction au CSS</h2>
 <p>
-Comprendre le CSS et apprendre à styliser une page web.
+3. Mettre les attributs entre guillemets.
 </p>
+
+<div class="code">
+✅ href="page.html"<br>
+❌ href=page.html
 </div>
 
-<div class="lesson">
-<h2>📖 Chapitre 8 : Les couleurs, textes et polices</h2>
 <p>
-Modifier les couleurs, les tailles et les polices de caractères.
+4. Écrire les balises en minuscules pour une meilleure lisibilité.
 </p>
-</div>
 
-<div class="lesson">
-<h2>📖 Chapitre 9 : Les boîtes, marges et espacements</h2>
 <p>
-Comprendre le modèle de boîte (Box Model), les marges et les espacements.
+✅ Conclusion : HTML est simple, il suffit de bien connaître les balises et de respecter la structure pour construire des pages web fonctionnelles.
 </p>
-</div>
 
-<div class="lesson">
-<h2>📖 Chapitre 10 : Projet final HTML & CSS</h2>
-<p>
-Créer un site web complet en appliquant toutes les notions apprises.
-</p>
-</div>
-
-</body>
-</html>
+  </div>

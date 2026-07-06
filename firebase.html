@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Formation Firebase - TechNova Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#050816;
+color:white;
+padding:20px;
+}
+
+body::before{
+content:"";
+position:fixed;
+width:400px;
+height:400px;
+background:#4f46e5;
+filter:blur(140px);
+top:-150px;
+left:-150px;
+opacity:.4;
+z-index:-1;
+}
+
+body::after{
+content:"";
+position:fixed;
+width:400px;
+height:400px;
+background:#2563eb;
+filter:blur(140px);
+bottom:-150px;
+right:-150px;
+opacity:.4;
+z-index:-1;
+}
+
+.header{
+text-align:center;
+margin-bottom:30px;
+}
+
+.header h1{
+font-size:38px;
+margin-bottom:10px;
+}
+
+.header p{
+color:#cbd5e1;
+}
+
+.back{
+display:inline-block;
+margin-bottom:25px;
+padding:10px 20px;
+background:rgba(255,255,255,.08);
+border-radius:12px;
+text-decoration:none;
+color:white;
+}
+
+.lesson{
+background:rgba(255,255,255,.05);
+padding:25px;
+border-radius:20px;
+margin-bottom:20px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.lesson h2{
+margin-bottom:15px;
+color:#60a5fa;
+}
+
+.lesson h3{
+margin-top:15px;
+margin-bottom:10px;
+color:#22c55e;
+}
+
+.lesson p,
+.lesson li{
+line-height:1.8;
+color:#e2e8f0;
+}
+
+.lesson ul{
+margin-left:20px;
+margin-top:10px;
+}
+
+.code{
+background:#111827;
+padding:15px;
+border-radius:12px;
+margin-top:15px;
+margin-bottom:15px;
+overflow:auto;
+font-family:monospace;
+color:#60a5fa;
+}
+
+@media(max-width:768px){
+
+.header h1{
+font-size:28px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<a href="formations.html" class="back">
+⬅ Retour aux formations
+</a>
+
+<div class="header">
+
+<h1>🔥 Formation Firebase</h1>
+
+<p>
+Apprenez à créer des applications connectées au Cloud avec Firebase.
+</p>
+
+</div>
+
+<div class="lesson">
+
+<h1 style="text-align:center;color:#f59e0b;">
+🔥 DÉBUT DU COURS FIREBASE
+</h1>
+
+<p style="text-align:center;">
+Niveau : Débutant
+<br>
+Formation universitaire
+<br>
+6 Chapitres
+</p>
+
+</div>
+
+<div class="lesson">
+
+<h2>📌 Présentation générale</h2>
+
+<p>
+
+Firebase est une plateforme Backend-as-a-Service (BaaS) développée par Google.
+
+Elle permet de créer rapidement des applications Web et Mobile sans avoir besoin de développer un serveur.
+
+Firebase fournit plusieurs services comme :
+
+</p>
+
+<ul>
+
+<li>Authentification</li>
+
+<li>Cloud Firestore</li>
+
+<li>Cloud Storage</li>
+
+<li>Firebase Hosting</li>
+
+<li>Cloud Functions</li>
+
+<li>Analytics</li>
+
+</ul>
+
+<p>
+
+Grâce à Firebase, les développeurs peuvent se concentrer sur leur application pendant que Google gère l'infrastructure.
+
+</p>
+
+</div>
+<div class="lesson">
+
+<h2>📖 CHAPITRE 1 : Introduction et prise en main</h2>
+
+<h3>Concepts clés</h3>
+
+<ul>
+
+<li><strong>Projet :</strong> conteneur principal regroupant votre application et tous les services Firebase.</li>
+
+<li><strong>Console Firebase :</strong> interface web permettant de gérer votre projet.</li>
+
+<li><strong>SDK :</strong> bibliothèque que l'on ajoute dans son projet pour communiquer avec Firebase.</li>
+
+<li><strong>Avantage :</strong> création rapide d'applications sans gérer de serveur.</li>
+
+<li><strong>Limite :</strong> moins adapté aux applications très complexes nécessitant une base de données relationnelle.</li>
+
+</ul>
+
+<h3>Étapes de démarrage</h3>
+
+<ol>
+
+<li>Créer un projet sur Firebase.</li>
+
+<li>Ajouter une application Web.</li>
+
+<li>Récupérer la configuration Firebase.</li>
+
+<li>Ajouter le SDK dans votre projet.</li>
+
+<li>Activer les services nécessaires.</li>
+
+</ol>
+
+</div>
+
+<div class="lesson">
+
+<h2>📖 CHAPITRE 2 : Authentification des utilisateurs</h2>
+
+<p>
+
+Firebase Authentication permet de créer facilement un système de connexion sécurisé.
+
+</p>
+
+<h3>Méthodes de connexion</h3>
+
+<ul>
+
+<li>Email / Mot de passe</li>
+
+<li>Compte Google</li>
+
+<li>Facebook</li>
+
+<li>GitHub</li>
+
+<li>Numéro de téléphone</li>
+
+</ul>
+
+<h3>Fonctionnalités</h3>
+
+<ul>
+
+<li>Création de compte</li>
+
+<li>Connexion</li>
+
+<li>Déconnexion</li>
+
+<li>Réinitialisation du mot de passe</li>
+
+<li>Gestion automatique des sessions</li>
+
+</ul>
+
+<div class="code">
+
+const auth = getAuth(app);
+
+</div>
+
+<p>
+
+Chaque utilisateur possède un identifiant unique appelé <strong>UID</strong>.
+
+</p>
+
+</div>
+
+<div class="lesson">
+
+<h2>📖 CHAPITRE 3 : Cloud Firestore</h2>
+
+<p>
+
+Cloud Firestore est une base de données NoSQL fonctionnant en temps réel.
+
+</p>
+
+<h3>Organisation</h3>
+
+<ul>
+
+<li>Collection</li>
+
+<li>Document</li>
+
+<li>Champ</li>
+
+</ul>
+
+<p>
+
+Chaque document possède un identifiant unique et contient plusieurs champs.
+
+</p>
+
+<h3>Les opérations CRUD</h3>
+
+<ul>
+
+<li>Créer : <strong>addDoc()</strong> ou <strong>setDoc()</strong></li>
+
+<li>Lire : <strong>getDoc()</strong></li>
+
+<li>Modifier : <strong>updateDoc()</strong></li>
+
+<li>Supprimer : <strong>deleteDoc()</strong></li>
+
+</ul>
+
+<div class="code">
+
+Collection
+
+↓
+
+Document
+
+↓
+
+Nom : Béni
+
+Âge : 20
+
+Pays : RDC
+
+</div>
+
+<p>
+
+Firestore permet également d'écouter les modifications en temps réel grâce à <strong>onSnapshot()</strong>.
+
+</p>
+
+</div>
+<div class="lesson">
+
+<h2>📖 CHAPITRE 4 : Stockage des fichiers</h2>
+
+<p>
+
+Firebase propose un service appelé <strong>Cloud Storage</strong> qui permet de stocker différents types de fichiers.
+
+</p>
+
+<ul>
+
+<li>Images</li>
+
+<li>Vidéos</li>
+
+<li>Documents PDF</li>
+
+<li>Fichiers ZIP</li>
+
+<li>Audio</li>
+
+</ul>
+
+<h3>Fonctionnalités principales</h3>
+
+<ul>
+
+<li>Téléverser un fichier</li>
+
+<li>Télécharger un fichier</li>
+
+<li>Supprimer un fichier</li>
+
+<li>Organiser les fichiers dans des dossiers</li>
+
+<li>Partager un lien sécurisé</li>
+
+</ul>
+
+<p>
+
+Bonne pratique : les fichiers sont enregistrés dans Cloud Storage tandis que leurs informations (nom, URL, date...) sont stockées dans Firestore.
+
+</p>
+
+<div class="code">
+
+Images/
+
+profil.jpg
+
+Documents/
+
+certificat.pdf
+
+Videos/
+
+cours.mp4
+
+</div>
+
+</div>
+
+<div class="lesson">
+
+<h2>📖 CHAPITRE 5 : Sécurité et règles d'accès</h2>
+
+<p>
+
+Firebase protège automatiquement vos données grâce aux règles de sécurité.
+
+</p>
+
+<p>
+
+Par défaut, personne ne peut accéder aux données tant que vous n'avez pas défini des autorisations.
+
+</p>
+
+<h3>Exemple de règle Firestore</h3>
+
+<div class="code">
+
+rules_version = '2';
+
+service cloud.firestore {
+
+match /databases/{database}/documents {
+
+match /utilisateurs/{uid} {
+
+allow read, write:
+
+if request.auth != null
+
+&& request.auth.uid == uid;
+
+}
+
+}
+
+}
+
+</div>
+
+<h3>Bonnes pratiques</h3>
+
+<ul>
+
+<li>Ne jamais laisser la base ouverte à tout le monde.</li>
+
+<li>Toujours vérifier si l'utilisateur est connecté.</li>
+
+<li>Limiter les droits d'accès selon le rôle de chaque utilisateur.</li>
+
+<li>Tester les règles avant de publier l'application.</li>
+
+</ul>
+
+</div>
+
+<div class="lesson">
+
+<h2>📖 CHAPITRE 6 : Déploiement et services complémentaires</h2>
+
+<p>
+
+Lorsque votre application est terminée, Firebase permet de la publier facilement sur Internet grâce à Firebase Hosting.
+
+</p>
+
+<div class="code">
+
+firebase init hosting
+
+firebase deploy
+
+</div>
+
+<h3>Autres services Firebase</h3>
+
+<ul>
+
+<li>Cloud Functions</li>
+
+<li>Firebase Hosting</li>
+
+<li>Firebase Analytics</li>
+
+<li>Crashlytics</li>
+
+<li>Cloud Messaging (Notifications)</li>
+
+<li>Remote Config</li>
+
+<li>Performance Monitoring</li>
+
+</ul>
+
+<p>
+
+Tous ces services fonctionnent ensemble pour créer des applications modernes, rapides et sécurisées.
+
+</p>
+
+</div>
+<div class="lesson">
+
+<h2>📝 EXERCICES PRATIQUES</h2>
+
+<h3>Exercice 1 : Mise en place</h3>
+
+<ol>
+
+<li>Créer un projet Firebase.</li>
+
+<li>Enregistrer une application Web.</li>
+
+<li>Récupérer la configuration Firebase.</li>
+
+<li>Ajouter le SDK dans votre projet.</li>
+
+</ol>
+
+<h3>Exercice 2 : Authentification</h3>
+
+<ol>
+
+<li>Activer la connexion par e-mail et mot de passe.</li>
+
+<li>Créer un compte utilisateur.</li>
+
+<li>Se connecter.</li>
+
+<li>Se déconnecter.</li>
+
+</ol>
+
+<h3>Exercice 3 : Firestore</h3>
+
+<ol>
+
+<li>Créer une collection <strong>produits</strong>.</li>
+
+<li>Ajouter les champs <strong>nom</strong>, <strong>prix</strong> et <strong>categorie</strong>.</li>
+
+<li>Lire les données.</li>
+
+<li>Modifier un document.</li>
+
+<li>Supprimer un document.</li>
+
+</ol>
+
+</div>
+
+<div class="lesson">
+
+<h2>✔ VRAI OU FAUX</h2>
+
+<p>1. Firebase oblige à gérer son propre serveur.</p>
+
+<p>2. Firestore est une base NoSQL.</p>
+
+<p>3. Cloud Storage sert à stocker les fichiers.</p>
+
+<p>4. Firebase appartient à Google.</p>
+
+<p>5. Authentication permet de gérer les utilisateurs.</p>
+
+</div>
+
+<div class="lesson">
+
+<h2>📖 CORRECTIONS</h2>
+
+<p>1. ❌ Faux</p>
+
+<p>2. ✅ Vrai</p>
+
+<p>3. ✅ Vrai</p>
+
+<p>4. ✅ Vrai</p>
+
+<p>5. ✅ Vrai</p>
+
+</div>
+
+<div class="lesson">
+
+<h2>📚 RÉSUMÉ DU COURS</h2>
+
+<p>
+
+Firebase est une plateforme Backend-as-a-Service (BaaS) développée par Google.
+
+Elle permet de créer rapidement des applications modernes sans gérer un serveur.
+
+</p>
+
+<p>
+
+Les principaux services sont :
+
+</p>
+
+<ul>
+
+<li>Firebase Authentication</li>
+
+<li>Cloud Firestore</li>
+
+<li>Cloud Storage</li>
+
+<li>Firebase Hosting</li>
+
+<li>Cloud Functions</li>
+
+<li>Analytics</li>
+
+</ul>
+
+<p>
+
+Grâce à Firebase, les données sont synchronisées en temps réel entre tous les appareils connectés.
+
+</p>
+
+</div>
+
+<div class="lesson">
+
+<h2>🎯 À RETENIR</h2>
+
+<ul>
+
+<li>✅ Firebase est développé par Google.</li>
+
+<li>✅ Firestore est une base de données NoSQL.</li>
+
+<li>✅ Cloud Storage permet de stocker les fichiers.</li>
+
+<li>✅ Authentication gère les utilisateurs.</li>
+
+<li>✅ Hosting permet de publier un site Web.</li>
+
+<li>✅ Les règles de sécurité protègent les données.</li>
+
+<li>✅ Firebase fonctionne parfaitement avec HTML, CSS et JavaScript.</li>
+
+</ul>
+
+</div>
+
+<div class="lesson">
+
+<h2>📜 HISTOIRE DE FIREBASE</h2>
+
+<p>
+
+2011 : Firebase est créé par Firebase Inc.
+
+</p>
+
+<p>
+
+2014 : Google rachète Firebase afin d'en faire une plateforme complète pour les développeurs.
+
+</p>
+
+<p>
+
+2017 : Google lance Cloud Firestore.
+
+</p>
+
+<p>
+
+Aujourd'hui, Firebase est l'une des plateformes Cloud les plus utilisées dans le monde pour le développement d'applications Web et Mobile.
+
+</p>
+
+</div>
+
+<div class="lesson" style="text-align:center;">
+
+<h2 style="color:#22c55e;">
+
+🎉 FIN DE LA FORMATION FIREBASE
+
+</h2>
+
+<p>
+
+Félicitations !
+
+Vous avez terminé le niveau débutant de Firebase.
+
+Vous êtes maintenant prêt à apprendre Firebase au niveau intermédiaire.
+
+</p>
+
+<a href="#" style="display:inline-block;padding:15px 30px;background:linear-gradient(90deg,#2563eb,#7c3aed);color:white;text-decoration:none;border-radius:12px;font-weight:700;margin-top:20px;">
+
+🏆 Marquer comme terminé
+
+</a>
+
+</div>
+
+</body>
+</html>

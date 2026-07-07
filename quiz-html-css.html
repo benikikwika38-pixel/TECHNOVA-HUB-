@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Quiz HTML & CSS - TechNova Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#050816;
+color:white;
+padding:20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+}
+
+.quiz{
+background:rgba(255,255,255,.05);
+padding:30px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+h1{
+text-align:center;
+margin-bottom:15px;
+}
+
+.question{
+font-size:24px;
+margin-bottom:25px;
+color:#60a5fa;
+}
+
+.option{
+background:rgba(255,255,255,.08);
+padding:15px;
+border-radius:12px;
+margin:10px 0;
+cursor:pointer;
+transition:.3s;
+}
+
+.option:hover{
+background:#2563eb;
+}
+
+.btn{
+margin-top:25px;
+padding:15px 30px;
+border:none;
+border-radius:12px;
+background:linear-gradient(90deg,#2563eb,#7c3aed);
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+
+.result{
+display:none;
+text-align:center;
+margin-top:30px;
+}
+
+.success{
+color:#22c55e;
+font-size:28px;
+font-weight:700;
+}
+
+.fail{
+color:#ef4444;
+font-size:28px;
+font-weight:700;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="quiz">
+
+<h1>📝 Quiz HTML & CSS</h1>
+
+<h3 id="questionNumber">
+Question 1 / 10
+</h3>
+
+<div id="question" class="question"></div>
+
+<div id="answers"></div>
+
+<button class="btn" onclick="nextQuestion()">
+Suivant
+</button>
+
+<div class="result" id="result">
+
+<h2 id="score"></h2>
+
+<h1 id="message"></h1>
+
+<a href="certificat.html" class="btn">
+🏆 Obtenir mon certificat
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+const quiz = [
+
+{
+question:"Que signifie HTML ?",
+answers:[
+"Hyper Text Markup Language",
+"High Text Machine Language",
+"Home Tool Markup Language",
+"Hyper Tool Multi Language"
+],
+correct:0
+},
+
+{
+question:"À quoi sert HTML ?",
+answers:[
+"Créer la structure d'une page web",
+"Créer des animations",
+"Créer une base de données",
+"Créer un serveur"
+],
+correct:0
+},
+
+{
+question:"Quel langage est utilisé pour la mise en forme ?",
+answers:[
+"Java",
+"Python",
+"CSS",
+"C++"
+],
+correct:2
+},
+
+{
+question:"Quelle balise sert à créer un paragraphe ?",
+answers:[
+"<div>",
+"<p>",
+"<h1>",
+"<span>"
+],
+correct:1
+},
+
+{
+question:"Quelle balise permet de créer un lien ?",
+answers:[
+"<img>",
+"<table>",
+"<a>",
+"<link>"
+],
+correct:2
+},
+
+{
+question:"Quelle propriété CSS change la couleur du texte ?",
+answers:[
+"background",
+"font-size",
+"color",
+"text"
+],
+correct:2
+},
+
+{
+question:"Quelle propriété CSS change la taille du texte ?",
+answers:[
+"font-size",
+"size",
+"height",
+"width"
+],
+correct:0
+},
+
+{
+question:"Quel fichier contient généralement le CSS ?",
+answers:[
+"style.css",
+"index.html",
+"script.js",
+"firebase.js"
+],
+correct:0
+},
+
+{
+question:"Quel langage rend une page web interactive ?",
+answers:[
+"HTML",
+"CSS",
+"JavaScript",
+"SQL"
+],
+correct:2
+},
+
+{
+question:"HTML est...",
+answers:[
+"Un langage de programmation",
+"Un langage de balisage",
+"Un système d'exploitation",
+"Une base de données"
+],
+correct:1
+}
+
+];
+
+let currentQuestion=0;
+let score=0;
+let selected=null;
+
+loadQuestion();
+
+function loadQuestion(){
+
+document.getElementById("questionNumber").innerHTML=
+"Question "+(currentQuestion+1)+" / "+quiz.length;
+
+document.getElementById("question").innerHTML=
+quiz[currentQuestion].question;
+
+let html="";
+
+quiz[currentQuestion].answers.forEach((answer,index)=>{
+
+html+=`
+<div class="option"
+onclick="selectAnswer(${index},this)">
+${answer}
+</div>
+`;
+
+});
+
+document.getElementById("answers").innerHTML=html;
+
+selected=null;
+
+}
+
+function selectAnswer(index,element){
+
+selected=index;
+
+document.querySelectorAll(".option").forEach(option=>{
+
+option.style.background="rgba(255,255,255,.08)";
+
+});
+
+element.style.background="#2563eb";
+
+}
+
+function nextQuestion(){
+
+if(selected===null){
+
+alert("Veuillez sélectionner une réponse.");
+
+return;
+
+}
+
+if(selected===quiz[currentQuestion].correct){
+
+score++;
+
+}
+
+currentQuestion++;
+
+if(currentQuestion<quiz.length){
+
+loadQuestion();
+
+}else{
+
+showResult();
+
+}
+
+}
+
+function showResult(){
+
+document.querySelector(".quiz").innerHTML=`
+
+<h1>Résultat du Quiz</h1>
+
+<h2>Score : ${score} / ${quiz.length}</h2>
+
+<h2>${Math.round(score/quiz.length*100)}%</h2>
+
+${
+score>=7?
+
+'<h1 style="color:#22c55e;">🎉 Félicitations ! Vous avez réussi.</h1><br><a href="certificat.html" class="btn">🏆 Obtenir mon certificat</a>'
+
+:
+
+'<h1 style="color:#ef4444;">❌ Vous avez échoué.<br>Il faut au moins 70% pour réussir.</h1><br><button class="btn" onclick="location.reload()">🔄 Recommencer</button>'
+
+}
+
+`;
+
+}
+</script>
+</body>
+</html>

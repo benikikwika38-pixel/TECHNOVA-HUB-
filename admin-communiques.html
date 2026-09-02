@@ -4,13 +4,21 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Administration - Communiqués</title>
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Administration - Communiqués | TechNova Hub</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
 
 <style>
+
+/* =========================
+   RESET
+========================= */
 
 *{
     margin:0;
@@ -19,161 +27,492 @@
     font-family:'Poppins',sans-serif;
 }
 
+
+/* =========================
+   BODY
+========================= */
+
 body{
+
     background:#050816;
+
     color:white;
+
     min-height:100vh;
+
     padding:20px;
+
 }
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    width:450px;
+
+    height:450px;
+
+    background:#4f46e5;
+
+    filter:blur(150px);
+
+    top:-200px;
+
+    left:-150px;
+
+    opacity:.35;
+
+    z-index:-1;
+
+}
+
+body::after{
+
+    content:"";
+
+    position:fixed;
+
+    width:450px;
+
+    height:450px;
+
+    background:#2563eb;
+
+    filter:blur(150px);
+
+    bottom:-200px;
+
+    right:-150px;
+
+    opacity:.35;
+
+    z-index:-1;
+
+}
+
+
+/* =========================
+   CONTAINER
+========================= */
 
 .container{
+
     max-width:850px;
+
     margin:40px auto;
+
 }
+
+
+/* =========================
+   RETOUR
+========================= */
 
 .back{
+
     display:inline-block;
+
     text-decoration:none;
+
     color:white;
+
     background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.08);
+
     padding:10px 18px;
+
     border-radius:12px;
+
     margin-bottom:25px;
+
+    transition:.3s;
+
 }
 
+.back:hover{
+
+    background:rgba(255,255,255,.15);
+
+    transform:translateX(-3px);
+
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
 .header{
+
     text-align:center;
+
     margin-bottom:30px;
+
 }
 
 .header h1{
+
     font-size:35px;
+
+    margin-bottom:8px;
+
 }
 
 .header p{
+
     color:#94a3b8;
-    margin-top:8px;
+
 }
+
+
+/* =========================
+   ADMIN BADGE
+========================= */
+
+.admin-badge{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:7px 15px;
+
+    border-radius:50px;
+
+    background:rgba(34,197,94,.10);
+
+    border:1px solid rgba(34,197,94,.25);
+
+    color:#4ade80;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+
+/* =========================
+   PANEL
+========================= */
 
 .panel{
+
     background:rgba(255,255,255,.06);
+
     border:1px solid rgba(255,255,255,.10);
+
     padding:30px;
+
     border-radius:22px;
+
+    backdrop-filter:blur(20px);
+
 }
 
+
+/* =========================
+   LABEL
+========================= */
+
 label{
+
     display:block;
+
     margin-bottom:8px;
+
     font-weight:600;
+
 }
+
+
+/* =========================
+   INPUT
+========================= */
 
 input,
 textarea{
+
     width:100%;
+
     background:rgba(255,255,255,.08);
+
     border:1px solid rgba(255,255,255,.10);
+
     color:white;
+
     padding:15px;
+
     border-radius:12px;
+
     outline:none;
+
     margin-bottom:20px;
+
 }
 
 input:focus,
 textarea:focus{
+
     border-color:#60a5fa;
+
+}
+
+input::placeholder,
+textarea::placeholder{
+
+    color:#94a3b8;
+
 }
 
 textarea{
+
     min-height:180px;
+
     resize:vertical;
+
 }
 
+
+/* =========================
+   BUTTON
+========================= */
+
 button{
+
     width:100%;
+
     padding:15px;
+
     border:none;
+
     border-radius:12px;
-    background:linear-gradient(90deg,#2563eb,#7c3aed);
+
+    background:
+    linear-gradient(
+        90deg,
+        #2563eb,
+        #7c3aed
+    );
+
     color:white;
+
     font-size:16px;
+
     font-weight:700;
+
     cursor:pointer;
+
+    transition:.3s;
+
 }
 
 button:hover{
-    opacity:.9;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 10px 25px
+    rgba(37,99,235,.25);
+
 }
 
 button:disabled{
+
     opacity:.6;
+
     cursor:not-allowed;
+
+    transform:none;
+
 }
 
+
+/* =========================
+   MESSAGE
+========================= */
+
 .message{
+
     margin-top:20px;
+
     padding:15px;
+
     border-radius:12px;
+
     display:none;
+
+    line-height:1.5;
+
 }
 
 .success{
+
     display:block;
+
     background:rgba(34,197,94,.12);
+
     color:#4ade80;
+
+    border:1px solid rgba(34,197,94,.20);
+
 }
 
 .error{
+
     display:block;
+
     background:rgba(239,68,68,.12);
+
     color:#f87171;
+
+    border:1px solid rgba(239,68,68,.20);
+
 }
 
+
+/* =========================
+   LISTE
+========================= */
+
 .list{
+
     margin-top:30px;
+
 }
 
 .list h2{
+
     margin-bottom:20px;
+
 }
 
+
+/* =========================
+   ITEM
+========================= */
+
 .item{
+
     background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
     padding:20px;
+
     border-radius:15px;
+
     margin-bottom:15px;
+
 }
 
 .item h3{
-    margin-bottom:8px;
+
+    margin-bottom:10px;
+
+    color:#93c5fd;
+
 }
 
 .item p{
+
     color:#cbd5e1;
+
     white-space:pre-wrap;
+
     line-height:1.6;
+
 }
 
-.delete{
-    width:auto;
-    background:#dc2626;
-    padding:9px 15px;
-    margin-top:15px;
+.item small{
+
+    display:block;
+
+    margin-top:12px;
+
+    color:#64748b;
+
 }
+
+
+/* =========================
+   DELETE
+========================= */
+
+.delete{
+
+    width:auto;
+
+    background:#dc2626;
+
+    padding:9px 15px;
+
+    margin-top:15px;
+
+    font-size:13px;
+
+}
+
+.delete:hover{
+
+    background:#b91c1c;
+
+    box-shadow:none;
+
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    padding:20px;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:600px){
 
+    body{
+
+        padding:12px;
+
+    }
+
     .container{
+
         margin:20px auto;
+
     }
 
     .panel{
+
         padding:20px;
+
     }
 
     .header h1{
-        font-size:28px;
+
+        font-size:27px;
+
     }
 
 }
@@ -182,32 +521,73 @@ button:disabled{
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
-<a href="dashboard.html" class="back">
-⬅ Retour Dashboard
+
+<!-- =========================
+     RETOUR
+========================= -->
+
+<a
+href="dashboard.html"
+class="back">
+
+⬅ Retour au Dashboard
+
 </a>
+
+
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <div class="header">
 
-<h1>📢 Gestion des communiqués</h1>
+<h1>
+
+📢 Gestion des communiqués
+
+</h1>
 
 <p>
+
 Espace réservé à l'administration de TechNova Hub.
+
 </p>
+
+<span class="admin-badge">
+
+🔐 ADMINISTRATEUR AUTORISÉ
+
+</span>
 
 </div>
 
 
-<div class="panel">
+
+<!-- =========================
+     FORMULAIRE
+========================= -->
+
+<div class="panel"
+id="adminPanel"
+style="display:none;">
+
 
 <form id="formCommunique">
 
+
 <label for="titre">
+
 Titre du communiqué
+
 </label>
+
 
 <input
 type="text"
@@ -218,8 +598,11 @@ required
 
 
 <label for="contenu">
+
 Contenu du communiqué
+
 </label>
+
 
 <textarea
 id="contenu"
@@ -228,129 +611,292 @@ required
 ></textarea>
 
 
-<button type="submit" id="publishBtn">
+<button
+type="submit"
+id="publishBtn">
 
 📢 Publier le communiqué
 
 </button>
 
+
 </form>
 
 
-<div id="message" class="message"></div>
+<div
+id="message"
+class="message">
+</div>
+
 
 </div>
 
+
+
+<!-- =========================
+     COMMUNIQUÉS
+========================= -->
 
 <div class="list">
 
-<h2>📋 Communiqués publiés</h2>
+<h2>
 
-<div id="liste">
+📋 Communiqués publiés
 
-Chargement...
+</h2>
+
+
+<div
+id="liste"
+class="loading">
+
+Chargement des communiqués...
 
 </div>
 
-</div>
 
 </div>
 
+
+</div>
+
+
+
+<!-- =========================
+     FIREBASE
+========================= -->
 
 <script type="module">
 
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+/* =========================
+   IMPORT FIREBASE APP
+========================= */
 
 import {
-    getAuth,
-    onAuthStateChanged
+
+initializeApp
+
 }
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+
+
+/* =========================
+   IMPORT AUTH
+========================= */
 
 import {
-    getFirestore,
-    collection,
-    addDoc,
-    deleteDoc,
-    doc,
-    query,
-    orderBy,
-    onSnapshot,
-    serverTimestamp
-}
-from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
+getAuth,
+
+onAuthStateChanged
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+
+
+/* =========================
+   IMPORT FIRESTORE
+========================= */
+
+import {
+
+getFirestore,
+
+collection,
+
+addDoc,
+
+deleteDoc,
+
+doc,
+
+query,
+
+orderBy,
+
+onSnapshot,
+
+serverTimestamp
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+
+/* =========================
+   CONFIGURATION FIREBASE
+========================= */
 
 const firebaseConfig = {
 
-    apiKey: "AIzaSyADpfbXDg9Sr9sa-y9ImIydodzvQqUOpDU",
+    apiKey:
+    "AIzaSyADpfbXDg9Sr9sa-y9ImIydodzvQqUOpDU",
 
-    authDomain: "technova-hub-a6133.firebaseapp.com",
+    authDomain:
+    "technova-hub-a6133.firebaseapp.com",
 
-    projectId: "technova-hub-a6133",
+    projectId:
+    "technova-hub-a6133",
 
-    storageBucket: "technova-hub-a6133.firebasestorage.app",
+    storageBucket:
+    "technova-hub-a6133.firebasestorage.app",
 
-    messagingSenderId: "858060696573",
+    messagingSenderId:
+    "858060696573",
 
-    appId: "1:858060696573:web:8f62c54a7e798bce230794"
+    appId:
+    "1:858060696573:web:8f62c54a7e798bce230794"
 
 };
 
 
-const app = initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
+/* =========================
+   INITIALISATION
+========================= */
 
-const db = getFirestore(app);
+const app =
+initializeApp(firebaseConfig);
+
+
+const auth =
+getAuth(app);
+
+
+const db =
+getFirestore(app);
+
+
+
+/* =========================
+   TON UID ADMIN
+========================= */
+
+const ADMIN_UID =
+"z7RI30KNzTx4yH2";
+
+
+
+/* =========================
+   ÉLÉMENTS HTML
+========================= */
+
+const adminPanel =
+document.getElementById("adminPanel");
 
 
 const form =
 document.getElementById("formCommunique");
 
+
 const titre =
 document.getElementById("titre");
+
 
 const contenu =
 document.getElementById("contenu");
 
+
 const message =
 document.getElementById("message");
 
+
 const button =
 document.getElementById("publishBtn");
+
 
 const liste =
 document.getElementById("liste");
 
 
-let utilisateurConnecte = null;
+
+/* =========================
+   AUTHENTIFICATION
+========================= */
+
+onAuthStateChanged(auth, (user) => {
 
 
-onAuthStateChanged(auth, async (user) => {
+    /* =========================
+       PERSONNE CONNECTÉE
+    ========================= */
 
     if(!user){
 
-        window.location.href = "login.html";
+        window.location.href =
+        "login.html";
 
         return;
 
     }
 
-    utilisateurConnecte = user;
+
+
+    /* =========================
+       VÉRIFICATION UID
+    ========================= */
+
+    if(user.uid !== ADMIN_UID){
+
+        alert(
+            "⛔ Accès refusé.\n\n" +
+            "Cette page est réservée à l'administrateur."
+        );
+
+        window.location.href =
+        "dashboard.html";
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       ADMIN AUTORISÉ
+    ========================= */
+
+    adminPanel.style.display =
+    "block";
+
 
     chargerCommuniques();
 
 });
 
 
-form.addEventListener("submit", async (e) => {
+
+/* =========================
+   PUBLICATION
+========================= */
+
+form.addEventListener(
+"submit",
+async (e) => {
+
 
     e.preventDefault();
 
 
-    if(!utilisateurConnecte){
+
+    /* =========================
+       VÉRIFICATION UTILISATEUR
+    ========================= */
+
+    const user =
+    auth.currentUser;
+
+
+    if(!user){
 
         afficherMessage(
             "❌ Vous devez être connecté.",
@@ -362,11 +908,35 @@ form.addEventListener("submit", async (e) => {
     }
 
 
+
+    /* =========================
+       VÉRIFICATION ADMIN
+    ========================= */
+
+    if(user.uid !== ADMIN_UID){
+
+        afficherMessage(
+            "⛔ Vous n'êtes pas autorisé à publier.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       RÉCUPÉRATION DES DONNÉES
+    ========================= */
+
     const titreValue =
     titre.value.trim();
 
+
     const contenuValue =
     contenu.value.trim();
+
 
 
     if(!titreValue || !contenuValue){
@@ -381,157 +951,312 @@ form.addEventListener("submit", async (e) => {
     }
 
 
-    button.disabled = true;
+
+    /* =========================
+       BOUTON
+    ========================= */
+
+    button.disabled =
+    true;
+
 
     button.textContent =
     "⏳ Publication...";
 
 
+
+    /* =========================
+       FIRESTORE
+    ========================= */
+
     try{
 
         await addDoc(
-            collection(db, "communiques"),
+
+            collection(
+                db,
+                "communiques"
+            ),
+
             {
 
-                titre: titreValue,
+                titre:
+                titreValue,
 
-                contenu: contenuValue,
+                contenu:
+                contenuValue,
 
-                auteur: utilisateurConnecte.uid,
+                auteur:
+                user.uid,
 
-                createdAt: serverTimestamp()
+                createdAt:
+                serverTimestamp()
 
             }
+
         );
 
+
+
+        /* =========================
+           RESET
+        ========================= */
 
         form.reset();
 
 
+
         afficherMessage(
-            "✅ Communiqué publié avec succès ! Il est maintenant visible par les utilisateurs.",
+
+            "✅ Communiqué publié avec succès ! " +
+            "Tous les utilisateurs connectés pourront le voir.",
+
             "success"
+
         );
 
 
-    }catch(error){
+    }
 
-        console.error(error);
+    catch(error){
+
+        console.error(
+            "Erreur Firestore :",
+            error
+        );
+
 
         afficherMessage(
-            "❌ Erreur lors de la publication.",
+
+            "❌ Publication refusée. " +
+            "Vérifie tes règles Firestore.",
+
             "error"
+
         );
 
     }
 
 
-    button.disabled = false;
+    button.disabled =
+    false;
+
 
     button.textContent =
     "📢 Publier le communiqué";
 
+
 });
 
 
+
+/* =========================
+   CHARGER COMMUNIQUÉS
+========================= */
+
 function chargerCommuniques(){
 
-    const q = query(
-        collection(db, "communiques"),
-        orderBy("createdAt", "desc")
+
+    const q =
+    query(
+
+        collection(
+            db,
+            "communiques"
+        ),
+
+        orderBy(
+            "createdAt",
+            "desc"
+        )
+
     );
 
 
-    onSnapshot(q, (snapshot) => {
 
-        liste.innerHTML = "";
+    onSnapshot(
 
+        q,
 
-        if(snapshot.empty){
+        (snapshot) => {
+
 
             liste.innerHTML =
-            "<p>Aucun communiqué publié.</p>";
-
-            return;
-
-        }
+            "";
 
 
-        snapshot.forEach((documentSnapshot) => {
 
-            const data =
-            documentSnapshot.data();
+            if(snapshot.empty){
 
+                liste.innerHTML =
 
-            const item =
-            document.createElement("div");
+                "<p class='loading'>" +
+                "Aucun communiqué publié." +
+                "</p>";
 
-            item.className = "item";
-
-
-            let date = "";
-
-
-            if(data.createdAt){
-
-                date =
-                data.createdAt.toDate()
-                .toLocaleString("fr-FR");
+                return;
 
             }
 
 
-            item.innerHTML = `
 
-                <h3>
-                    📢 ${escapeHTML(data.titre || "")}
-                </h3>
-
-                <p>
-                    ${escapeHTML(data.contenu || "")}
-                </p>
-
-                <small>
-                    ${date}
-                </small>
-
-                <br>
-
-                <button
-                    class="delete"
-                    data-id="${documentSnapshot.id}"
-                >
-                    🗑️ Supprimer
-                </button>
-
-            `;
+            snapshot.forEach(
+            (documentSnapshot) => {
 
 
-            item.querySelector(".delete")
-            .addEventListener("click", () => {
+                const data =
+                documentSnapshot.data();
 
-                supprimerCommunique(
-                    documentSnapshot.id
+
+
+                const item =
+                document.createElement(
+                    "div"
                 );
+
+
+                item.className =
+                "item";
+
+
+
+                let date =
+                "Date indisponible";
+
+
+
+                if(data.createdAt){
+
+                    date =
+                    data.createdAt
+                    .toDate()
+                    .toLocaleString(
+                        "fr-FR"
+                    );
+
+                }
+
+
+
+                item.innerHTML = `
+
+                    <h3>
+                        📢 ${escapeHTML(
+                            data.titre || ""
+                        )}
+                    </h3>
+
+                    <p>
+                        ${escapeHTML(
+                            data.contenu || ""
+                        )}
+                    </p>
+
+                    <small>
+                        🕒 ${date}
+                    </small>
+
+                    <button
+                        class="delete"
+                        data-id="${documentSnapshot.id}"
+                    >
+                        🗑️ Supprimer
+                    </button>
+
+                `;
+
+
+
+                item
+                .querySelector(".delete")
+                .addEventListener(
+                    "click",
+                    () => {
+
+                        supprimerCommunique(
+                            documentSnapshot.id
+                        );
+
+                    }
+                );
+
+
+
+                liste.appendChild(
+                    item
+                );
+
 
             });
 
+        },
 
-            liste.appendChild(item);
+        (error) => {
 
-        });
+            console.error(
+                "Erreur lecture :",
+                error
+            );
 
-    });
+
+            liste.innerHTML =
+
+            "<p class='loading'>" +
+            "❌ Impossible de charger les communiqués." +
+            "</p>";
+
+        }
+
+    );
 
 }
 
 
+
+/* =========================
+   SUPPRESSION
+========================= */
+
 async function supprimerCommunique(id){
+
+
+    const user =
+    auth.currentUser;
+
+
+
+    /* =========================
+       VÉRIFICATION ADMIN
+    ========================= */
+
+    if(!user ||
+       user.uid !== ADMIN_UID){
+
+        afficherMessage(
+
+            "⛔ Vous n'êtes pas autorisé à supprimer.",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+
+    /* =========================
+       CONFIRMATION
+    ========================= */
 
     const confirmation =
     confirm(
-        "Voulez-vous vraiment supprimer ce communiqué ?"
+
+        "⚠️ Voulez-vous vraiment supprimer ce communiqué ?"
+
     );
+
 
 
     if(!confirmation){
@@ -541,26 +1266,47 @@ async function supprimerCommunique(id){
     }
 
 
+
     try{
 
+
         await deleteDoc(
-            doc(db, "communiques", id)
+
+            doc(
+                db,
+                "communiques",
+                id
+            )
+
         );
 
 
+
         afficherMessage(
-            "✅ Communiqué supprimé.",
+
+            "✅ Communiqué supprimé avec succès.",
+
             "success"
+
         );
 
 
-    }catch(error){
+    }
 
-        console.error(error);
+    catch(error){
+
+        console.error(
+            "Erreur suppression :",
+            error
+        );
+
 
         afficherMessage(
-            "❌ Impossible de supprimer le communiqué.",
+
+            "❌ Impossible de supprimer ce communiqué.",
+
             "error"
+
         );
 
     }
@@ -568,9 +1314,19 @@ async function supprimerCommunique(id){
 }
 
 
-function afficherMessage(text,type){
 
-    message.textContent = text;
+/* =========================
+   MESSAGE
+========================= */
+
+function afficherMessage(
+text,
+type
+){
+
+    message.textContent =
+    text;
+
 
     message.className =
     "message " + type;
@@ -578,12 +1334,22 @@ function afficherMessage(text,type){
 }
 
 
+
+/* =========================
+   PROTECTION HTML
+========================= */
+
 function escapeHTML(text){
 
     const div =
-    document.createElement("div");
+    document.createElement(
+        "div"
+    );
 
-    div.textContent = text;
+
+    div.textContent =
+    text;
+
 
     return div.innerHTML;
 
@@ -591,6 +1357,7 @@ function escapeHTML(text){
 
 </script>
 
+
 </body>
 
-</html>
+    </html>

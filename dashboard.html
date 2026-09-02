@@ -270,7 +270,50 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
 const auth = getAuth(app);
+
+const db = getFirestore(app);
+/* ==========================
+   🔔 NOTIFICATIONS
+========================== */
+
+const notificationCount =
+document.getElementById("notificationCount");
+
+
+const communiquesQuery = query(
+
+collection(db, "communiques"),
+
+orderBy("createdAt", "desc")
+
+);
+
+
+onSnapshot(communiquesQuery, (snapshot) => {
+
+const total = snapshot.size;
+
+
+if(total > 0){
+
+notificationCount.textContent = total;
+
+notificationCount.style.display = "flex";
+
+}else{
+
+notificationCount.style.display = "none";
+
+}
+
+});
+
+
+/* ==========================
+   🚪 DÉCONNEXION
+========================== */
 
 window.logout = async function(){
 

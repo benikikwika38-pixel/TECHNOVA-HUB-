@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Administration - TechNova Hub</title>
+
+<link
+href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+rel="stylesheet">
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+
+/* =========================
+   BODY
+========================= */
+
+body{
+
+background:#050816;
+
+color:white;
+
+min-height:100vh;
+
+padding:20px;
+
+overflow-x:hidden;
+
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+body::before{
+
+content:"";
+
+position:fixed;
+
+width:450px;
+
+height:450px;
+
+background:#4f46e5;
+
+filter:blur(150px);
+
+top:-200px;
+
+left:-150px;
+
+opacity:.35;
+
+z-index:-1;
+
+}
+
+body::after{
+
+content:"";
+
+position:fixed;
+
+width:450px;
+
+height:450px;
+
+background:#2563eb;
+
+filter:blur(150px);
+
+bottom:-200px;
+
+right:-150px;
+
+opacity:.35;
+
+z-index:-1;
+
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.admin-header{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:20px 25px;
+
+background:rgba(255,255,255,.05);
+
+border:1px solid rgba(255,255,255,.1);
+
+border-radius:20px;
+
+backdrop-filter:blur(20px);
+
+margin-bottom:30px;
+
+}
+
+
+.logo{
+
+font-size:27px;
+
+font-weight:800;
+
+background:linear-gradient(
+90deg,
+#60a5fa,
+#a855f7
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+
+
+.header-right{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+}
+
+
+/* =========================
+   ADMIN BADGE
+========================= */
+
+.admin-badge{
+
+padding:9px 15px;
+
+border-radius:50px;
+
+background:rgba(96,165,250,.12);
+
+border:1px solid rgba(96,165,250,.3);
+
+color:#93c5fd;
+
+font-size:13px;
+
+font-weight:600;
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+.logout-btn{
+
+padding:11px 20px;
+
+border:none;
+
+border-radius:12px;
+
+background:linear-gradient(
+135deg,
+#ef4444,
+#dc2626
+);
+
+color:white;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.logout-btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+0 10px 25px
+rgba(239,68,68,.35);
+
+}
+
+
+/* =========================
+   WELCOME
+========================= */
+
+.welcome{
+
+margin-bottom:30px;
+
+}
+
+.welcome h1{
+
+font-size:34px;
+
+margin-bottom:8px;
+
+}
+
+.welcome p{
+
+color:#cbd5e1;
+
+}
+
+
+/* =========================
+   STATISTICS
+========================= */
+
+.stats{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(190px,1fr)
+);
+
+gap:20px;
+
+margin-bottom:35px;
+
+}
+
+
+.stat-card{
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid
+rgba(255,255,255,.08);
+
+border-radius:20px;
+
+padding:25px;
+
+transition:.3s;
+
+}
+
+
+.stat-card:hover{
+
+transform:translateY(-5px);
+
+border-color:#60a5fa;
+
+}
+
+
+.stat-icon{
+
+font-size:30px;
+
+margin-bottom:10px;
+
+}
+
+
+.stat-card h2{
+
+font-size:30px;
+
+color:#60a5fa;
+
+margin-bottom:5px;
+
+}
+
+
+.stat-card p{
+
+color:#cbd5e1;
+
+font-size:14px;
+
+}
+
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.section-title{
+
+font-size:22px;
+
+margin-bottom:20px;
+
+}
+
+
+/* =========================
+   ADMIN MODULES
+========================= */
+
+.modules{
+
+display:grid;
+
+grid-template-columns:
+repeat(
+auto-fit,
+minmax(250px,1fr)
+);
+
+gap:20px;
+
+margin-bottom:35px;
+
+}
+
+
+.module{
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid
+rgba(255,255,255,.08);
+
+border-radius:20px;
+
+padding:30px;
+
+transition:.3s;
+
+}
+
+
+.module:hover{
+
+transform:translateY(-5px);
+
+border-color:#60a5fa;
+
+}
+
+
+.module-icon{
+
+font-size:40px;
+
+margin-bottom:15px;
+
+}
+
+
+.module h3{
+
+font-size:20px;
+
+margin-bottom:10px;
+
+}
+
+
+.module p{
+
+color:#cbd5e1;
+
+font-size:14px;
+
+line-height:1.6;
+
+margin-bottom:20px;
+
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+.btn{
+
+display:inline-flex;
+
+align-items:center;
+
+justify-content:center;
+
+padding:11px 18px;
+
+border-radius:12px;
+
+background:
+linear-gradient(
+135deg,
+#2563eb,
+#4f46e5
+);
+
+color:white;
+
+text-decoration:none;
+
+font-size:14px;
+
+font-weight:600;
+
+transition:.3s;
+
+border:none;
+
+cursor:pointer;
+
+}
+
+.btn:hover{
+
+transform:translateY(-3px);
+
+box-shadow:
+0 10px 25px
+rgba(37,99,235,.3);
+
+}
+
+
+/* =========================
+   QUICK ACTIONS
+========================= */
+
+.quick-actions{
+
+background:
+rgba(255,255,255,.05);
+
+border:
+1px solid
+rgba(255,255,255,.08);
+
+border-radius:20px;
+
+padding:25px;
+
+margin-bottom:30px;
+
+}
+
+
+.quick-actions h2{
+
+margin-bottom:20px;
+
+}
+
+
+.actions{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:12px;
+
+}
+
+
+/* =========================
+   SECURITY
+========================= */
+
+.security{
+
+padding:20px;
+
+border-radius:18px;
+
+background:
+rgba(34,197,94,.07);
+
+border:
+1px solid
+rgba(34,197,94,.2);
+
+margin-bottom:30px;
+
+}
+
+
+.security h3{
+
+margin-bottom:8px;
+
+color:#86efac;
+
+}
+
+
+.security p{
+
+color:#cbd5e1;
+
+font-size:14px;
+
+line-height:1.6;
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+text-align:center;
+
+padding:25px;
+
+color:#64748b;
+
+font-size:13px;
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:768px){
+
+body{
+
+padding:12px;
+
+}
+
+.admin-header{
+
+flex-direction:column;
+
+gap:15px;
+
+text-align:center;
+
+}
+
+.header-right{
+
+flex-wrap:wrap;
+
+justify-content:center;
+
+}
+
+.logo{
+
+font-size:23px;
+
+}
+
+.welcome h1{
+
+font-size:27px;
+
+}
+
+.stats{
+
+grid-template-columns:1fr 1fr;
+
+}
+
+.modules{
+
+grid-template-columns:1fr;
+
+}
+
+.actions{
+
+flex-direction:column;
+
+}
+
+.btn{
+
+width:100%;
+
+}
+
+}
+
+@media(max-width:450px){
+
+.stats{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="admin-header">
+
+<div class="logo">
+
+🚀 TechNova Hub
+
+</div>
+
+
+<div class="header-right">
+
+<span class="admin-badge">
+
+🔐 ADMINISTRATEUR
+
+</span>
+
+
+<button
+class="logout-btn"
+onclick="logout()">
+
+🚪 Déconnexion
+
+</button>
+
+</div>
+
+</header>
+
+
+
+<!-- =========================
+     WELCOME
+========================= -->
+
+<section class="welcome">
+
+<h1>
+
+👋 Bienvenue dans l'administration
+
+</h1>
+
+<p>
+
+Gérez votre plateforme TechNova Hub depuis cet espace.
+
+</p>
+
+</section>
+
+
+
+<!-- =========================
+     STATISTICS
+========================= -->
+
+<section class="stats">
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+👥
+
+</div>
+
+<h2 id="usersCount">
+
+0
+
+</h2>
+
+<p>
+
+Utilisateurs
+
+</p>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+📢
+
+</div>
+
+<h2 id="communiquesCount">
+
+0
+
+</h2>
+
+<p>
+
+Communiqués
+
+</p>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+📚
+
+</div>
+
+<h2>
+
+6
+
+</h2>
+
+<p>
+
+Formations
+
+</p>
+
+</div>
+
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+
+🏆
+
+</div>
+
+<h2>
+
+0
+
+</h2>
+
+<p>
+
+Certificats
+
+</p>
+
+</div>
+
+
+</section>
+
+
+
+<!-- =========================
+     MODULES
+========================= -->
+
+<h2 class="section-title">
+
+⚙️ Gestion de la plateforme
+
+</h2>
+
+
+<section class="modules">
+
+
+<!-- COMMUNIQUÉS -->
+
+<div class="module">
+
+<div class="module-icon">
+
+📢
+
+</div>
+
+<h3>
+
+Communiqués
+
+</h3>
+
+<p>
+
+Publiez des annonces et informations importantes visibles par tous les utilisateurs.
+
+</p>
+
+<a
+href="admin-communiques.html"
+class="btn">
+
+📢 Gérer les communiqués
+
+</a>
+
+</div>
+
+
+
+<!-- FORMATIONS -->
+
+<div class="module">
+
+<div class="module-icon">
+
+📚
+
+</div>
+
+<h3>
+
+Formations
+
+</h3>
+
+<p>
+
+Accédez à la gestion des formations et du contenu pédagogique.
+
+</p>
+
+<a
+href="formations.html"
+class="btn">
+
+📚 Voir les formations
+
+</a>
+
+</div>
+
+
+
+<!-- UTILISATEURS -->
+
+<div class="module">
+
+<div class="module-icon">
+
+👥
+
+</div>
+
+<h3>
+
+Utilisateurs
+
+</h3>
+
+<p>
+
+Consultez les utilisateurs inscrits sur TechNova Hub.
+
+</p>
+
+<button
+class="btn"
+onclick="showUsers()">
+
+👥 Voir les utilisateurs
+
+</button>
+
+</div>
+
+
+
+<!-- CERTIFICATS -->
+
+<div class="module">
+
+<div class="module-icon">
+
+🏆
+
+</div>
+
+<h3>
+
+Certificats
+
+</h3>
+
+<p>
+
+Gérez et consultez les certificats délivrés aux étudiants.
+
+</p>
+
+<a
+href="certificats.html"
+class="btn">
+
+🏆 Gérer les certificats
+
+</a>
+
+</div>
+
+
+</section>
+
+
+
+<!-- =========================
+     ACTIONS RAPIDES
+========================= -->
+
+<section class="quick-actions">
+
+<h2>
+
+⚡ Actions rapides
+
+</h2>
+
+
+<div class="actions">
+
+
+<a
+href="admin-communiques.html"
+class="btn">
+
+📢 Nouveau communiqué
+
+</a>
+
+
+<a
+href="formations.html"
+class="btn">
+
+📚 Formations
+
+</a>
+
+
+<a
+href="communiques.html"
+class="btn">
+
+👁️ Voir les communiqués
+
+</a>
+
+
+<a
+href="dashboard.html"
+class="btn">
+
+🏠 Dashboard étudiant
+
+</a>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =========================
+     SECURITY
+========================= -->
+
+<section class="security">
+
+<h3>
+
+🔐 Sécurité administrateur
+
+</h3>
+
+<p>
+
+Cet espace est réservé à l'administrateur
+TechNova Hub. Les opérations sensibles doivent
+également être protégées par les règles de sécurité
+Firebase.
+
+</p>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+© 2026 TechNova Hub — Administration
+
+</footer>
+
+
+
+<!-- =========================
+     FIREBASE
+========================= -->
+
+<script type="module">
+
+
+/* =========================
+   IMPORT FIREBASE
+========================= */
+
+import {
+
+initializeApp
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+
+import {
+
+getAuth,
+
+onAuthStateChanged,
+
+signOut
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+
+import {
+
+getFirestore,
+
+collection,
+
+onSnapshot
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+
+/* =========================
+   FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+apiKey:
+"AIzaSyADpfbXDg9Sr9sa-y9ImIydodzvQqUOpDU",
+
+authDomain:
+"technova-hub-a6133.firebaseapp.com",
+
+projectId:
+"technova-hub-a6133",
+
+storageBucket:
+"technova-hub-a6133.firebasestorage.app",
+
+messagingSenderId:
+"858060696573",
+
+appId:
+"1:858060696573:web:8f62c54a7e798bce230794"
+
+};
+
+
+
+/* =========================
+   INITIALISATION
+========================= */
+
+const app =
+initializeApp(firebaseConfig);
+
+const auth =
+getAuth(app);
+
+const db =
+getFirestore(app);
+
+
+
+/* =========================
+   AUTHENTIFICATION
+========================= */
+
+onAuthStateChanged(auth, (user) => {
+
+if(!user){
+
+window.location.href =
+"login.html";
+
+return;
+
+}
+
+});
+
+
+
+/* =========================
+   NOMBRE D'UTILISATEURS
+========================= */
+
+const usersCount =
+document.getElementById("usersCount");
+
+
+onSnapshot(
+collection(db, "users"),
+(snapshot) => {
+
+usersCount.textContent =
+snapshot.size;
+
+});
+
+
+
+/* =========================
+   NOMBRE DE COMMUNIQUÉS
+========================= */
+
+const communiquesCount =
+document.getElementById("communiquesCount");
+
+
+onSnapshot(
+collection(db, "communiques"),
+(snapshot) => {
+
+communiquesCount.textContent =
+snapshot.size;
+
+});
+
+
+
+/* =========================
+   DÉCONNEXION
+========================= */
+
+window.logout =
+async function(){
+
+try{
+
+await signOut(auth);
+
+window.location.href =
+"login.html";
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"Une erreur est survenue lors de la déconnexion."
+);
+
+}
+
+};
+
+
+
+/* =========================
+   UTILISATEURS
+========================= */
+
+window.showUsers =
+function(){
+
+alert(
+"Le module de gestion des utilisateurs sera disponible prochainement."
+);
+
+};
+
+
+</script>
+
+
+</body>
+
+</html>

@@ -668,235 +668,144 @@ Chargement des communiqués...
 
 <script type="module">
 
-
-/* =========================
-   IMPORT FIREBASE APP
-========================= */
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
 
 import {
-
-initializeApp
-
+    getAuth,
+    onAuthStateChanged
 }
-
-from
-"https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-
-
-/* =========================
-   IMPORT AUTH
-========================= */
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 import {
-
-getAuth,
-
-onAuthStateChanged
-
+    getFirestore,
+    collection,
+    addDoc,
+    deleteDoc,
+    doc,
+    query,
+    orderBy,
+    onSnapshot,
+    serverTimestamp
 }
-
-from
-"https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
-
-/* =========================
-   IMPORT FIRESTORE
-========================= */
-
-import {
-
-getFirestore,
-
-collection,
-
-addDoc,
-
-deleteDoc,
-
-doc,
-
-query,
-
-orderBy,
-
-onSnapshot,
-
-serverTimestamp
-
-}
-
-from
-"https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
-
-
-
-/* =========================
-   CONFIGURATION FIREBASE
-========================= */
+/* =====================================
+   🔥 CONFIGURATION FIREBASE
+===================================== */
 
 const firebaseConfig = {
 
-    apiKey:
-    "AIzaSyADpfbXDg9Sr9sa-y9ImIydodzvQqUOpDU",
+    apiKey: "AIzaSyADpfbXDg9Sr9sa-y9ImIydodzvQqUOpDU",
 
-    authDomain:
-    "technova-hub-a6133.firebaseapp.com",
+    authDomain: "technova-hub-a6133.firebaseapp.com",
 
-    projectId:
-    "technova-hub-a6133",
+    projectId: "technova-hub-a6133",
 
-    storageBucket:
-    "technova-hub-a6133.firebasestorage.app",
+    storageBucket: "technova-hub-a6133.firebasestorage.app",
 
-    messagingSenderId:
-    "858060696573",
+    messagingSenderId: "858060696573",
 
-    appId:
-    "1:858060696573:web:8f62c54a7e798bce230794"
+    appId: "1:858060696573:web:8f62c54a7e798bce230794"
 
 };
 
 
+/* =====================================
+   🚀 INITIALISATION
+===================================== */
 
-/* =========================
-   INITIALISATION
-========================= */
+const app = initializeApp(firebaseConfig);
 
-const app =
-initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-
-const auth =
-getAuth(app);
+const db = getFirestore(app);
 
 
-const db =
-getFirestore(app);
+/* =====================================
+   👑 ADMINISTRATEUR TECHNOVA HUB
+===================================== */
+
+const ADMIN_UID = "z7RI30KNzTx4yH2";
 
 
+/* =====================================
+   📌 ÉLÉMENTS
+===================================== */
 
-/* =========================
-   TON UID ADMIN
-========================= */
-
-const ADMIN_UID =
-"z7RI30KNzTx4yH2";
-
-
-
-/* =========================
-   ÉLÉMENTS HTML
-========================= */
-
-const adminPanel =
-document.getElementById("adminPanel");
+const form = document.getElementById("formCommunique");
+const titre = document.getElementById("titre");
+const contenu = document.getElementById("contenu");
+const message = document.getElementById("message");
+const button = document.getElementById("publishBtn");
+const liste = document.getElementById("liste");
 
 
-const form =
-document.getElementById("formCommunique");
+let utilisateurConnecte = null;
 
 
-const titre =
-document.getElementById("titre");
-
-
-const contenu =
-document.getElementById("contenu");
-
-
-const message =
-document.getElementById("message");
-
-
-const button =
-document.getElementById("publishBtn");
-
-
-const liste =
-document.getElementById("liste");
-
-
-
-/* =========================
-   AUTHENTIFICATION
-========================= */
+/* =====================================
+   🔐 VÉRIFICATION DU COMPTE
+===================================== */
 
 onAuthStateChanged(auth, (user) => {
 
+    if (!user) {
 
-    /* =========================
-       PERSONNE CONNECTÉE
-    ========================= */
-
-    if(!user){
-
-        window.location.href =
-        "login.html";
+        window.location.href = "login.html";
 
         return;
-
     }
 
 
+    utilisateurConnecte = user;
 
-    /* =========================
-       VÉRIFICATION UID
-    ========================= */
 
-    if(user.uid !== ADMIN_UID){
+    console.log("UID connecté :", user.uid);
+    console.log("UID administrateur :", ADMIN_UID);
+
+
+    /* =================================
+       👑 VÉRIFICATION ADMIN
+    ================================= */
+
+    if (user.uid !== ADMIN_UID) {
 
         alert(
             "⛔ Accès refusé.\n\n" +
-            "Cette page est réservée à l'administrateur."
+            "Cette page est réservée à l'administrateur de TechNova Hub."
         );
 
-        window.location.href =
-        "dashboard.html";
+        window.location.href = "dashboard.html";
 
         return;
-
     }
 
 
+    /* =================================
+       ✅ COMPTE ADMINISTRATEUR
+    ================================= */
 
-    /* =========================
-       ADMIN AUTORISÉ
-    ========================= */
-
-    adminPanel.style.display =
-    "block";
-
+    console.log("✅ Administrateur reconnu.");
 
     chargerCommuniques();
 
 });
 
 
+/* =====================================
+   📢 PUBLIER UN COMMUNIQUÉ
+===================================== */
 
-/* =========================
-   PUBLICATION
-========================= */
-
-form.addEventListener(
-"submit",
-async (e) => {
-
+form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
 
+    /* Vérifier connexion */
 
-    /* =========================
-       VÉRIFICATION UTILISATEUR
-    ========================= */
-
-    const user =
-    auth.currentUser;
-
-
-    if(!user){
+    if (!utilisateurConnecte) {
 
         afficherMessage(
             "❌ Vous devez être connecté.",
@@ -904,16 +813,12 @@ async (e) => {
         );
 
         return;
-
     }
 
 
+    /* Vérifier UID administrateur */
 
-    /* =========================
-       VÉRIFICATION ADMIN
-    ========================= */
-
-    if(user.uid !== ADMIN_UID){
+    if (utilisateurConnecte.uid !== ADMIN_UID) {
 
         afficherMessage(
             "⛔ Vous n'êtes pas autorisé à publier.",
@@ -921,25 +826,15 @@ async (e) => {
         );
 
         return;
-
     }
 
 
+    const titreValue = titre.value.trim();
 
-    /* =========================
-       RÉCUPÉRATION DES DONNÉES
-    ========================= */
-
-    const titreValue =
-    titre.value.trim();
+    const contenuValue = contenu.value.trim();
 
 
-    const contenuValue =
-    contenu.value.trim();
-
-
-
-    if(!titreValue || !contenuValue){
+    if (!titreValue || !contenuValue) {
 
         afficherMessage(
             "⚠️ Veuillez remplir tous les champs.",
@@ -947,78 +842,42 @@ async (e) => {
         );
 
         return;
-
     }
 
 
+    button.disabled = true;
 
-    /* =========================
-       BOUTON
-    ========================= */
-
-    button.disabled =
-    true;
+    button.textContent = "⏳ Publication...";
 
 
-    button.textContent =
-    "⏳ Publication...";
-
-
-
-    /* =========================
-       FIRESTORE
-    ========================= */
-
-    try{
+    try {
 
         await addDoc(
-
-            collection(
-                db,
-                "communiques"
-            ),
-
+            collection(db, "communiques"),
             {
 
-                titre:
-                titreValue,
+                titre: titreValue,
 
-                contenu:
-                contenuValue,
+                contenu: contenuValue,
 
-                auteur:
-                user.uid,
+                auteur: ADMIN_UID,
 
-                createdAt:
-                serverTimestamp()
+                createdAt: serverTimestamp()
 
             }
-
         );
 
-
-
-        /* =========================
-           RESET
-        ========================= */
 
         form.reset();
 
 
-
         afficherMessage(
-
-            "✅ Communiqué publié avec succès ! " +
-            "Tous les utilisateurs connectés pourront le voir.",
-
+            "✅ Communiqué publié avec succès !",
             "success"
-
         );
 
 
-    }
-
-    catch(error){
+    } catch (error) {
 
         console.error(
             "Erreur Firestore :",
@@ -1027,286 +886,202 @@ async (e) => {
 
 
         afficherMessage(
-
-            "❌ Publication refusée. " +
-            "Vérifie tes règles Firestore.",
-
+            "❌ Erreur lors de la publication : " +
+            error.message,
             "error"
-
         );
 
+
+    } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "📢 Publier le communiqué";
+
     }
-
-
-    button.disabled =
-    false;
-
-
-    button.textContent =
-    "📢 Publier le communiqué";
-
 
 });
 
 
+/* =====================================
+   📋 AFFICHER LES COMMUNIQUÉS
+===================================== */
 
-/* =========================
-   CHARGER COMMUNIQUÉS
-========================= */
+function chargerCommuniques() {
 
-function chargerCommuniques(){
-
-
-    const q =
-    query(
-
-        collection(
-            db,
-            "communiques"
-        ),
-
-        orderBy(
-            "createdAt",
-            "desc"
-        )
-
+    const q = query(
+        collection(db, "communiques"),
+        orderBy("createdAt", "desc")
     );
 
 
-
     onSnapshot(
-
         q,
 
         (snapshot) => {
 
-
-            liste.innerHTML =
-            "";
+            liste.innerHTML = "";
 
 
-
-            if(snapshot.empty){
+            if (snapshot.empty) {
 
                 liste.innerHTML =
-
-                "<p class='loading'>" +
-                "Aucun communiqué publié." +
-                "</p>";
+                    "<p>Aucun communiqué publié.</p>";
 
                 return;
-
             }
 
 
-
             snapshot.forEach(
-            (documentSnapshot) => {
+                (documentSnapshot) => {
+
+                    const data =
+                        documentSnapshot.data();
 
 
-                const data =
-                documentSnapshot.data();
+                    const item =
+                        document.createElement("div");
+
+                    item.className = "item";
 
 
-
-                const item =
-                document.createElement(
-                    "div"
-                );
+                    let date = "";
 
 
-                item.className =
-                "item";
+                    if (data.createdAt) {
 
-
-
-                let date =
-                "Date indisponible";
-
-
-
-                if(data.createdAt){
-
-                    date =
-                    data.createdAt
-                    .toDate()
-                    .toLocaleString(
-                        "fr-FR"
-                    );
-
-                }
-
-
-
-                item.innerHTML = `
-
-                    <h3>
-                        📢 ${escapeHTML(
-                            data.titre || ""
-                        )}
-                    </h3>
-
-                    <p>
-                        ${escapeHTML(
-                            data.contenu || ""
-                        )}
-                    </p>
-
-                    <small>
-                        🕒 ${date}
-                    </small>
-
-                    <button
-                        class="delete"
-                        data-id="${documentSnapshot.id}"
-                    >
-                        🗑️ Supprimer
-                    </button>
-
-                `;
-
-
-
-                item
-                .querySelector(".delete")
-                .addEventListener(
-                    "click",
-                    () => {
-
-                        supprimerCommunique(
-                            documentSnapshot.id
-                        );
+                        date =
+                            data.createdAt
+                                .toDate()
+                                .toLocaleString("fr-FR");
 
                     }
-                );
 
 
+                    item.innerHTML = `
 
-                liste.appendChild(
+                        <h3>
+                            📢 ${escapeHTML(
+                                data.titre || ""
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                data.contenu || ""
+                            )}
+                        </p>
+
+                        <small>
+                            ${date}
+                        </small>
+
+                        <br>
+
+                        <button
+                            class="delete"
+                            data-id="${documentSnapshot.id}"
+                        >
+                            🗑️ Supprimer
+                        </button>
+
+                    `;
+
+
                     item
-                );
+                        .querySelector(".delete")
+                        .addEventListener(
+                            "click",
+                            () => {
+
+                                supprimerCommunique(
+                                    documentSnapshot.id
+                                );
+
+                            }
+                        );
 
 
-            });
+                    liste.appendChild(item);
+
+                }
+            );
 
         },
 
         (error) => {
 
             console.error(
-                "Erreur lecture :",
+                "Erreur lecture Firestore :",
                 error
             );
 
 
             liste.innerHTML =
-
-            "<p class='loading'>" +
-            "❌ Impossible de charger les communiqués." +
-            "</p>";
+                "<p>❌ Impossible de charger les communiqués.</p>";
 
         }
-
     );
 
 }
 
 
+/* =====================================
+   🗑️ SUPPRIMER UN COMMUNIQUÉ
+===================================== */
 
-/* =========================
-   SUPPRESSION
-========================= */
+async function supprimerCommunique(id) {
 
-async function supprimerCommunique(id){
+    if (!utilisateurConnecte) {
 
-
-    const user =
-    auth.currentUser;
+        return;
+    }
 
 
-
-    /* =========================
-       VÉRIFICATION ADMIN
-    ========================= */
-
-    if(!user ||
-       user.uid !== ADMIN_UID){
+    if (utilisateurConnecte.uid !== ADMIN_UID) {
 
         afficherMessage(
-
             "⛔ Vous n'êtes pas autorisé à supprimer.",
-
             "error"
-
         );
 
         return;
-
     }
 
 
-
-    /* =========================
-       CONFIRMATION
-    ========================= */
-
-    const confirmation =
-    confirm(
-
-        "⚠️ Voulez-vous vraiment supprimer ce communiqué ?"
-
+    const confirmation = confirm(
+        "Voulez-vous vraiment supprimer ce communiqué ?"
     );
 
 
-
-    if(!confirmation){
+    if (!confirmation) {
 
         return;
-
     }
 
 
-
-    try{
-
+    try {
 
         await deleteDoc(
-
-            doc(
-                db,
-                "communiques",
-                id
-            )
-
+            doc(db, "communiques", id)
         );
 
 
-
         afficherMessage(
-
-            "✅ Communiqué supprimé avec succès.",
-
+            "✅ Communiqué supprimé.",
             "success"
-
         );
 
 
-    }
+    } catch (error) {
 
-    catch(error){
-
-        console.error(
-            "Erreur suppression :",
-            error
-        );
+        console.error(error);
 
 
         afficherMessage(
-
-            "❌ Impossible de supprimer ce communiqué.",
-
+            "❌ Impossible de supprimer le communiqué.",
             "error"
-
         );
 
     }
@@ -1314,50 +1089,33 @@ async function supprimerCommunique(id){
 }
 
 
+/* =====================================
+   💬 AFFICHER UN MESSAGE
+===================================== */
 
-/* =========================
-   MESSAGE
-========================= */
+function afficherMessage(texte, type) {
 
-function afficherMessage(
-text,
-type
-){
-
-    message.textContent =
-    text;
-
+    message.textContent = texte;
 
     message.className =
-    "message " + type;
+        "message " + type;
 
 }
 
 
+/* =====================================
+   🛡️ PROTECTION CONTRE HTML
+===================================== */
 
-/* =========================
-   PROTECTION HTML
-========================= */
-
-function escapeHTML(text){
+function escapeHTML(texte) {
 
     const div =
-    document.createElement(
-        "div"
-    );
+        document.createElement("div");
 
-
-    div.textContent =
-    text;
-
+    div.textContent = texte;
 
     return div.innerHTML;
 
 }
 
 </script>
-
-
-</body>
-
-    </html>

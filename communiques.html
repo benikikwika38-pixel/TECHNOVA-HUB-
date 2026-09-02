@@ -256,7 +256,7 @@ Chargement...
 
 </div>
 
-
+ 
 <script type="module">
 
 import { initializeApp }
@@ -282,6 +282,10 @@ import {
 from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
 
 
+/* ================================
+   🔥 CONFIGURATION FIREBASE
+================================ */
+
 const firebaseConfig = {
 
     apiKey: "AIzaSyADpfbXDg9Sr9sa-y9ImIydodzvQqUOpDU",
@@ -299,6 +303,10 @@ const firebaseConfig = {
 };
 
 
+/* ================================
+   🚀 INITIALISATION
+================================ */
+
 const app = initializeApp(firebaseConfig);
 
 const auth = getAuth(app);
@@ -306,31 +314,40 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 
-const form =
-document.getElementById("formCommunique");
+/* ================================
+   🔐 UID ADMINISTRATEUR
+================================ */
 
-const titre =
-document.getElementById("titre");
+const ADMIN_UID = "z7RI30KNzTx4yH2";
 
-const contenu =
-document.getElementById("contenu");
 
-const message =
-document.getElementById("message");
+/* ================================
+   📌 ÉLÉMENTS HTML
+================================ */
 
-const button =
-document.getElementById("publishBtn");
+const form = document.getElementById("formCommunique");
 
-const liste =
-document.getElementById("liste");
+const titre = document.getElementById("titre");
+
+const contenu = document.getElementById("contenu");
+
+const message = document.getElementById("message");
+
+const button = document.getElementById("publishBtn");
+
+const liste = document.getElementById("liste");
 
 
 let utilisateurConnecte = null;
 
 
-onAuthStateChanged(auth, async (user) => {
+/* ================================
+   🔐 VÉRIFICATION UTILISATEUR
+================================ */
 
-    if(!user){
+onAuthStateChanged(auth, (user) => {
+
+    if (!user) {
 
         window.location.href = "login.html";
 
@@ -338,19 +355,43 @@ onAuthStateChanged(auth, async (user) => {
 
     }
 
+
     utilisateurConnecte = user;
+
+
+    /* Vérification administrateur */
+
+    if (user.uid !== ADMIN_UID) {
+
+        alert(
+            "⛔ Accès refusé.\n\n" +
+            "Cette page est réservée à l'administrateur."
+        );
+
+        window.location.href = "dashboard.html";
+
+        return;
+
+    }
+
+
+    /* Si c'est bien l'admin */
 
     chargerCommuniques();
 
 });
 
 
+/* ================================
+   📢 PUBLICATION
+================================ */
+
 form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
 
-    if(!utilisateurConnecte){
+    if (!utilisateurConnecte) {
 
         afficherMessage(
             "❌ Vous devez être connecté.",
@@ -362,14 +403,26 @@ form.addEventListener("submit", async (e) => {
     }
 
 
-    const titreValue =
-    titre.value.trim();
+    /* Double sécurité */
 
-    const contenuValue =
-    contenu.value.trim();
+    if (utilisateurConnecte.uid !== ADMIN_UID) {
+
+        afficherMessage(
+            "⛔ Vous n'êtes pas autorisé à publier.",
+            "error"
+        );
+
+        return;
+
+    }
 
 
-    if(!titreValue || !contenuValue){
+    const titreValue = titre.value.trim();
+
+    const contenuValue = contenu.value.trim();
+
+
+    if (!titreValue || !contenuValue) {
 
         afficherMessage(
             "⚠️ Veuillez remplir tous les champs.",
@@ -383,11 +436,10 @@ form.addEventListener("submit", async (e) => {
 
     button.disabled = true;
 
-    button.textContent =
-    "⏳ Publication...";
+    button.textContent = "⏳ Publication...";
 
 
-    try{
+    try {
 
         await addDoc(
             collection(db, "communiques"),
@@ -409,32 +461,42 @@ form.addEventListener("submit", async (e) => {
 
 
         afficherMessage(
-            "✅ Communiqué publié avec succès ! Il est maintenant visible par les utilisateurs.",
+            "✅ Communiqué publié avec succès !",
             "success"
         );
 
 
-    }catch(error){
+    } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Erreur Firestore :",
+            error
+        );
+
 
         afficherMessage(
-            "❌ Erreur lors de la publication.",
+            "❌ Erreur lors de la publication : " +
+            error.message,
             "error"
         );
 
+    } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+            "📢 Publier le communiqué";
+
     }
-
-
-    button.disabled = false;
-
-    button.textContent =
-    "📢 Publier le communiqué";
 
 });
 
 
-function chargerCommuniques(){
+/* ================================
+   📋 CHARGER LES COMMUNIQUÉS
+================================ */
+
+function chargerCommuniques() {
 
     const q = query(
         collection(db, "communiques"),
@@ -442,106 +504,155 @@ function chargerCommuniques(){
     );
 
 
-    onSnapshot(q, (snapshot) => {
+    onSnapshot(
+        q,
+        (snapshot) => {
 
-        liste.innerHTML = "";
-
-
-        if(snapshot.empty){
-
-            liste.innerHTML =
-            "<p>Aucun communiqué publié.</p>";
-
-            return;
-
-        }
+            liste.innerHTML = "";
 
 
-        snapshot.forEach((documentSnapshot) => {
+            if (snapshot.empty) {
 
-            const data =
-            documentSnapshot.data();
+                liste.innerHTML =
+                    "<p>Aucun communiqué publié.</p>";
 
-
-            const item =
-            document.createElement("div");
-
-            item.className = "item";
-
-
-            let date = "";
-
-
-            if(data.createdAt){
-
-                date =
-                data.createdAt.toDate()
-                .toLocaleString("fr-FR");
+                return;
 
             }
 
 
-            item.innerHTML = `
+            snapshot.forEach(
+                (documentSnapshot) => {
 
-                <h3>
-                    📢 ${escapeHTML(data.titre || "")}
-                </h3>
-
-                <p>
-                    ${escapeHTML(data.contenu || "")}
-                </p>
-
-                <small>
-                    ${date}
-                </small>
-
-                <br>
-
-                <button
-                    class="delete"
-                    data-id="${documentSnapshot.id}"
-                >
-                    🗑️ Supprimer
-                </button>
-
-            `;
+                    const data =
+                        documentSnapshot.data();
 
 
-            item.querySelector(".delete")
-            .addEventListener("click", () => {
+                    const item =
+                        document.createElement("div");
 
-                supprimerCommunique(
-                    documentSnapshot.id
-                );
-
-            });
+                    item.className = "item";
 
 
-            liste.appendChild(item);
+                    let date = "";
 
-        });
 
-    });
+                    if (data.createdAt) {
+
+                        date =
+                            data.createdAt
+                                .toDate()
+                                .toLocaleString("fr-FR");
+
+                    }
+
+
+                    item.innerHTML = `
+
+                        <h3>
+                            📢 ${escapeHTML(
+                                data.titre || ""
+                            )}
+                        </h3>
+
+                        <p>
+                            ${escapeHTML(
+                                data.contenu || ""
+                            )}
+                        </p>
+
+                        <small>
+                            ${date}
+                        </small>
+
+                        <br>
+
+                        <button
+                            class="delete"
+                            data-id="${documentSnapshot.id}"
+                        >
+                            🗑️ Supprimer
+                        </button>
+
+                    `;
+
+
+                    item
+                        .querySelector(".delete")
+                        .addEventListener(
+                            "click",
+                            () => {
+
+                                supprimerCommunique(
+                                    documentSnapshot.id
+                                );
+
+                            }
+                        );
+
+
+                    liste.appendChild(item);
+
+                }
+            );
+
+        },
+
+        (error) => {
+
+            console.error(
+                "Erreur de lecture Firestore :",
+                error
+            );
+
+
+            liste.innerHTML =
+                "<p>❌ Impossible de charger les communiqués.</p>";
+
+        }
+    );
 
 }
 
 
-async function supprimerCommunique(id){
+/* ================================
+   🗑️ SUPPRIMER
+================================ */
 
-    const confirmation =
-    confirm(
-        "Voulez-vous vraiment supprimer ce communiqué ?"
-    );
+async function supprimerCommunique(id) {
 
-
-    if(!confirmation){
+    if (!utilisateurConnecte) {
 
         return;
 
     }
 
 
-    try{
+    if (utilisateurConnecte.uid !== ADMIN_UID) {
+
+        afficherMessage(
+            "⛔ Vous n'êtes pas autorisé à supprimer.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const confirmation = confirm(
+        "Voulez-vous vraiment supprimer ce communiqué ?"
+    );
+
+
+    if (!confirmation) {
+
+        return;
+
+    }
+
+
+    try {
 
         await deleteDoc(
             doc(db, "communiques", id)
@@ -554,9 +665,10 @@ async function supprimerCommunique(id){
         );
 
 
-    }catch(error){
+    } catch (error) {
 
         console.error(error);
+
 
         afficherMessage(
             "❌ Impossible de supprimer le communiqué.",
@@ -568,29 +680,33 @@ async function supprimerCommunique(id){
 }
 
 
-fonction  afficherMessage ( texte , type ) {
+/* ================================
+   💬 MESSAGE
+================================ */
 
-    message . texteContenu = texte ;
+function afficherMessage(texte, type) {
 
-    message . className =
-    "message " + type ;
+    message.textContent = texte;
 
-}
-
-
-fonction  escapeHTML ( texte ) {
-
-    const  div =
-    document.createElement ( " div " ) ;
-
-    div . textContent = texte ;
-
-    retourner  div . innerHTML ;
+    message.className =
+        "message " + type;
 
 }
 
-</script>​​
 
-</ corps >
+/* ================================
+   🛡️ PROTECTION HTML
+================================ */
 
-  </ html >
+function escapeHTML(texte) {
+
+    const div =
+        document.createElement("div");
+
+    div.textContent = texte;
+
+    return div.innerHTML;
+
+}
+
+</script>

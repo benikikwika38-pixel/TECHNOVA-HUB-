@@ -1,165 +1,622 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mon Profil - TechNova Hub</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
 
-<style>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+    <title>Mon Profil - TechNova Hub</title>
 
-body{
-background:#050816;
-color:white;
-padding:20px;
-}
+    <style>
 
-.profile-card{
-max-width:700px;
-margin:auto;
-background:rgba(255,255,255,.05);
-padding:30px;
-border-radius:20px;
-border:1px solid rgba(255,255,255,.1);
-}
+        *{
+            box-sizing:border-box;
+            margin:0;
+            padding:0;
+        }
 
-.profile-card h1{
-margin-bottom:20px;
-}
+        body{
+            font-family:Arial,sans-serif;
+            min-height:100vh;
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #1e293b,
+                    #0f172a
+                );
+            color:white;
+        }
 
-.info{
-margin:15px 0;
-padding:15px;
-background:rgba(255,255,255,.05);
-border-radius:12px;
-}
+        header{
+            padding:18px;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            border-bottom:1px solid rgba(255,255,255,.1);
+        }
 
-.back-btn{
-display:inline-block;
-margin-top:20px;
-padding:12px 20px;
-background:linear-gradient(90deg,#2563eb,#7c3aed);
-color:white;
-text-decoration:none;
-border-radius:12px;
-}
+        .logo{
+            font-size:20px;
+            font-weight:bold;
+        }
 
-</style>
+        .back{
+            color:white;
+            text-decoration:none;
+            background:rgba(255,255,255,.08);
+            padding:10px 15px;
+            border-radius:10px;
+        }
+
+        main{
+            width:100%;
+            max-width:600px;
+            margin:30px auto;
+            padding:15px;
+        }
+
+        .profile-card{
+            background:rgba(255,255,255,.07);
+            border:1px solid rgba(255,255,255,.1);
+            border-radius:20px;
+            padding:25px;
+            text-align:center;
+        }
+
+        .avatar{
+            width:100px;
+            height:100px;
+            margin:0 auto 15px;
+            border-radius:50%;
+            background:#334155;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:45px;
+        }
+
+        h1{
+            margin-bottom:8px;
+        }
+
+        .email{
+            color:#94a3b8;
+            margin-bottom:25px;
+        }
+
+        .info{
+            text-align:left;
+            margin-top:15px;
+        }
+
+        .info label{
+            display:block;
+            color:#94a3b8;
+            font-size:13px;
+            margin-bottom:6px;
+        }
+
+        .info input,
+        .info textarea{
+            width:100%;
+            padding:13px;
+            border:none;
+            outline:none;
+            border-radius:10px;
+            background:#1e293b;
+            color:white;
+            margin-bottom:15px;
+        }
+
+        .info textarea{
+            min-height:100px;
+            resize:vertical;
+        }
+
+        .btn{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:12px;
+            background:#2563eb;
+            color:white;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        .btn:hover{
+            background:#1d4ed8;
+        }
+
+        .message{
+            margin-top:15px;
+            padding:12px;
+            border-radius:10px;
+            display:none;
+        }
+
+        .success{
+            background:rgba(34,197,94,.15);
+            color:#4ade80;
+        }
+
+        .error{
+            background:rgba(239,68,68,.15);
+            color:#f87171;
+        }
+
+        @media(max-width:500px){
+
+            main{
+                margin-top:15px;
+            }
+
+            .profile-card{
+                padding:20px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
 <body>
 
-<div class="profile-card">
+<header>
 
-<h1>👤 Mon Profil</h1>
-<input type="file" id="photoInput" accept="image/*">
+    <div class="logo">
+        🚀 TechNova Hub
+    </div>
 
-  <<img
-src="IMG-20260605-WA0010.jpg"
-alt="Photo de profil"
-style="
-width:150px;
-height:150px;
-border-radius:50%;
-object-fit:cover;
-border:4px solid #60a5fa;
-display:block;
-margin:20px auto;
-">
-<div class="info">
-<strong>Nom :</strong>
-<span id="nom">Chargement...</span>
-</div>
+    <a
+        href="dashboard.html"
+        class="back"
+    >
+        ← Retour
+    </a>
 
-<div class="info">
-<strong>Email :</strong>
-<span id="email">Chargement...</span>
-</div>
+</header>
 
-<div class="info">
-<strong>UID :</strong>
-<span id="uid">Chargement...</span>
-</div>
+<main>
 
-<a href="dashboard.html" class="back-btn">
-⬅ Retour Dashboard
-</a>
+    <div class="profile-card">
 
-</div>
+        <div class="avatar">
+            👤
+        </div>
+
+        <h1 id="nomUtilisateur">
+            Chargement...
+        </h1>
+
+        <p
+            class="email"
+            id="emailUtilisateur"
+        >
+            Chargement...
+        </p>
+
+        <div class="info">
+
+            <label>
+                Nom complet
+            </label>
+
+            <input
+                type="text"
+                id="nom"
+                placeholder="Votre nom complet"
+            >
+
+            <label>
+                Matricule
+            </label>
+
+            <input
+                type="text"
+                id="matricule"
+                placeholder="Votre matricule"
+            >
+
+            <label>
+                Bio
+            </label>
+
+            <textarea
+                id="bio"
+                placeholder="Parlez un peu de vous..."
+            ></textarea>
+
+            <button
+                class="btn"
+                id="saveBtn"
+            >
+                💾 Enregistrer les modifications
+            </button>
+
+        </div>
+
+                <div
+            id="message"
+            class="message"
+        ></div>
+
+    </div>
+
+</main>
+
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+/* =====================================================
+   🔥 FIREBASE
+===================================================== */
 
 import {
-getAuth,
-onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
 
 import {
-getFirestore,
-doc,
-getDoc
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+    getAuth,
+    onAuthStateChanged
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+
+/* =====================================================
+   ⚙️ CONFIGURATION FIREBASE
+===================================================== */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyADpfbXDg9Sr9sa-y9ImIydodzvQqUOpDU",
-  authDomain: "technova-hub-a6133.firebaseapp.com",
-  projectId: "technova-hub-a6133",
-  storageBucket: "technova-hub-a6133.firebasestorage.app",
-  messagingSenderId: "858060696573",
-  appId: "1:858060696573:web:8f62c54a7e798bce230794"
+
+    apiKey:
+        "AIzaSyADpfbXDg9Sr9sa-y9ImIydodzvQqUOpDU",
+
+    authDomain:
+        "technova-hub-a6133.firebaseapp.com",
+
+    projectId:
+        "technova-hub-a6133",
+
+    storageBucket:
+        "technova-hub-a6133.firebasestorage.app",
+
+    messagingSenderId:
+        "858060696573",
+
+    appId:
+        "1:858060696573:web:8f62c54a7e798bce230794"
+
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
 
-onAuthStateChanged(auth, async(user)=>{
+/* =====================================================
+   🚀 INITIALISATION
+===================================================== */
 
-if(!user){
-window.location.href="login.html";
-return;
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+
+/* =====================================================
+   🎯 ELEMENTS HTML
+===================================================== */
+
+const nomUtilisateur =
+    document.getElementById("nomUtilisateur");
+
+const emailUtilisateur =
+    document.getElementById("emailUtilisateur");
+
+const nom =
+    document.getElementById("nom");
+
+const matricule =
+    document.getElementById("matricule");
+
+const bio =
+    document.getElementById("bio");
+
+const saveBtn =
+    document.getElementById("saveBtn");
+
+const message =
+    document.getElementById("message");
+
+
+/* =====================================================
+   👤 UTILISATEUR CONNECTÉ
+===================================================== */
+
+let utilisateurConnecte = null;
+
+
+/* =====================================================
+   🔐 VERIFICATION CONNEXION
+===================================================== */
+
+onAuthStateChanged(
+    auth,
+    async (user) => {
+
+        if(!user){
+
+            window.location.href =
+                "login.html";
+
+            return;
+
+        }
+
+
+        utilisateurConnecte = user;
+
+
+        /* Email Firebase */
+
+        emailUtilisateur.textContent =
+            user.email || "Email non disponible";
+
+
+        /* Charger le profil */
+
+        await chargerProfil(user.uid);
+
+    }
+);
+
+
+/* =====================================================
+   📥 CHARGER LE PROFIL
+===================================================== */
+
+async function chargerProfil(uid){
+
+    try{
+
+        const reference =
+            doc(
+                db,
+                "users",
+                uid
+            );
+
+
+        const resultat =
+            await getDoc(reference);
+
+
+        if(resultat.exists()){
+
+            const donnees =
+                resultat.data();
+
+
+            nom.value =
+                donnees.nom || "";
+
+
+            matricule.value =
+                donnees.matricule || "";
+
+
+            bio.value =
+                donnees.bio || "";
+
+
+            nomUtilisateur.textContent =
+                donnees.nom ||
+                "Mon Profil";
+
+        }
+        else{
+
+            nomUtilisateur.textContent =
+                "Mon Profil";
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "Erreur chargement profil :",
+            error
+        );
+
+
+        afficherMessage(
+            "❌ Impossible de charger votre profil.",
+            "error"
+        );
+
+    }
+
 }
 
-document.getElementById("email").textContent = user.email;
-document.getElementById("uid").textContent = user.uid;
 
-const docRef = doc(db,"users",user.uid);
-const docSnap = await getDoc(docRef);
+/* =====================================================
+   💾 ENREGISTRER LE PROFIL
+===================================================== */
 
-if(docSnap.exists()){
-document.getElementById("nom").textContent =
-docSnap.data().nom;
+saveBtn.addEventListener(
+    "click",
+    async () => {
+
+        if(!utilisateurConnecte){
+
+            afficherMessage(
+                "⛔ Vous devez être connecté.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        const nomValue =
+            nom.value.trim();
+
+        const matriculeValue =
+            matricule.value.trim();
+
+        const bioValue =
+            bio.value.trim();
+
+
+        if(!nomValue){
+
+            afficherMessage(
+                "⚠️ Veuillez entrer votre nom complet.",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+        saveBtn.disabled =
+            true;
+
+        saveBtn.textContent =
+            "⏳ Enregistrement...";
+
+
+        try{
+
+            const reference =
+                doc(
+                    db,
+                    "users",
+                    utilisateurConnecte.uid
+                );
+
+
+            await setDoc(
+                reference,
+                {
+
+                    nom:
+                        nomValue,
+
+                    matricule:
+                        matriculeValue,
+
+                    bio:
+                        bioValue,
+
+                    email:
+                        utilisateurConnecte.email,
+
+                    updatedAt:
+                        new Date()
+
+                },
+                {
+                    merge: true
+                }
+            );
+
+
+            nomUtilisateur.textContent =
+                nomValue;
+
+
+            afficherMessage(
+                "✅ Profil mis à jour avec succès.",
+                "success"
+            );
+
+        }
+        catch(error){
+
+            console.error(
+                "Erreur sauvegarde :",
+                error
+            );
+
+
+            afficherMessage(
+                "❌ Impossible d'enregistrer les modifications.",
+                "error"
+            );
+
+        }
+        finally{
+
+            saveBtn.disabled =
+                false;
+
+            saveBtn.textContent =
+                "💾 Enregistrer les modifications";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   💬 AFFICHER MESSAGE
+===================================================== */
+
+function afficherMessage(
+    texte,
+    type
+){
+
+    message.textContent =
+        texte;
+
+    message.className =
+        "message " + type;
+
+    message.style.display =
+        "block";
+
+
+    setTimeout(
+        () => {
+
+            message.style.display =
+                "none";
+
+        },
+        4000
+    );
+
 }
 
-});
 
 </script>
-<script>
-const photoInput = document.getElementById("photoInput");
 
-photoInput.addEventListener("change", function(){
 
-const file = this.files[0];
-
-if(file){
-
-const imageURL = URL.createObjectURL(file);
-
-document.querySelector("img").src = imageURL;
-
-}
-
-});
-</script>
 </body>
-</html>
+
+  </html>
